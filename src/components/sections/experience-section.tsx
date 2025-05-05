@@ -12,11 +12,12 @@ interface Experience {
   value: string; // Unique value for TabsTrigger
 }
 
+// Updated experiences based on README
 const experiences: Experience[] = [
    {
     company: 'Feather Software Solutions',
     role: 'MERN Stack Developer',
-    duration: 'July 2024 - Nov 2024',
+    duration: 'July 2024 - November 2024', // Corrected duration
     description: [
       'Built a robust delivery application enabling real-time order tracking and management.',
       'Improved delivery efficiency by 40% through route optimization and analytics.',
@@ -28,7 +29,7 @@ const experiences: Experience[] = [
   {
     company: 'Micromen Software Solutions',
     role: 'Application Developer',
-    duration: 'Jan 2024 - June 2024',
+    duration: 'January 2024 - June 2024', // Corrected duration
     description: [
       'Developed a feature-rich CRM application with React Native and Node.js, enhancing customer engagement by 40%.',
       'Optimized backend architecture, reducing API latency by 40% and increasing throughput.',
@@ -39,7 +40,7 @@ const experiences: Experience[] = [
   {
     company: 'Paladin Software Solutions',
     role: 'Junior Software Developer',
-    duration: 'Jan 2023 - Jan 2024',
+    duration: 'January 2023 - January 2024', // Corrected duration
     description: [
       'Designed scalable mobile applications with React Native, improving development speed by 20%.',
       'Streamlined state management using Redux Toolkit, reducing code complexity by 30%.',

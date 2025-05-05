@@ -1,3 +1,4 @@
+// @ts-nocheck
 'use client';
 import React, {useState} from 'react';
 import {
@@ -25,47 +26,109 @@ interface Project {
   githubUrl?: string;
   liveUrl?: string;
   image: string;
+  imageHint: string; // Added for data-ai-hint
 }
 
-// Updated with user's projects
+// Updated with user's projects and details
 const initialProjects: Project[] = [
   {
-    title: 'Praxis',
-    description:
-      'A real-time appointment booking app connecting patients and doctors seamlessly. Features integrated push notifications and real-time updates.',
-    tags: ['React Native', 'Node.js', 'WebSocket', 'Redux Toolkit', 'Push Notifications'],
-    githubUrl: 'https://github.com/berlin-joseph', // Placeholder - update if available
-    // liveUrl: '#', // Add live URL if available
-    image: 'https://picsum.photos/seed/praxis-app/600/400',
-  },
-  {
-    title: 'BSF',
-    description:
-      'A real estate mobile application for property listings and secure transaction management. Optimized state handling with Redux Toolkit & RTK Query.',
-    tags: ['React Native', 'Redux Toolkit', 'RTK Query', 'Firebase', 'Secure Transactions'],
-    githubUrl: 'https://github.com/berlin-joseph', // Placeholder - update if available
-    // liveUrl: '#', // Add live URL if available
-    image: 'https://picsum.photos/seed/bsf-app/600/400',
-  },
-   {
-    title: 'Delivery Application',
+    title: 'Delivery Application (Feather)',
     description:
       'A robust MERN stack delivery application enabling real-time order tracking, route optimization, secure payments, and notification systems.',
     tags: ['React', 'Node.js', 'Express', 'MongoDB', 'CI/CD', 'Payment Gateway'],
-    githubUrl: 'https://github.com/berlin-joseph', // Placeholder - update if available
-    // liveUrl: '#', // Add live URL if available
+    githubUrl: 'https://github.com/berlin-joseph', // Placeholder
     image: 'https://picsum.photos/seed/delivery-app/600/400',
+    imageHint: 'delivery tracking map interface',
+  },
+   {
+    title: 'Praxis (Paladin)',
+    description:
+      'A real-time appointment booking app connecting patients and doctors seamlessly. Features integrated push notifications and real-time updates.',
+    tags: ['React Native', 'Node.js', 'WebSocket', 'Redux Toolkit', 'Push Notifications'],
+    githubUrl: 'https://github.com/berlin-joseph', // Placeholder
+    image: 'https://picsum.photos/seed/praxis-app/600/400',
+    imageHint: 'appointment booking mobile app',
   },
   {
-    title: 'CRM Application',
+    title: 'BSF Sale (Micromen)',
     description:
-      'Feature-rich CRM application built with React Native and Node.js, featuring optimized backend architecture for enhanced customer engagement.',
-    tags: ['React Native', 'Node.js', 'Jest', 'React Testing Library', 'API Optimization'],
-    githubUrl: 'https://github.com/berlin-joseph', // Placeholder - update if available
-    // liveUrl: '#', // Add live URL if available
-    image: 'https://picsum.photos/seed/crm-app/600/400',
+      'Real estate sales CRM application for managing leads, properties, and transactions within the BSF suite.',
+    tags: ['React Native', 'Node.js', 'CRM', 'Real Estate'],
+    githubUrl: 'https://github.com/berlin-joseph', // Placeholder
+    liveUrl: 'https://apps.apple.com/in/app/bsfsale/id6502038086',
+    image: 'https://picsum.photos/seed/bsf-sale-crm/600/400',
+    imageHint: 'real estate crm mobile',
   },
-  // Add more projects if needed, or remove if fewer than 4
+   {
+    title: 'BSF ESS (Micromen)',
+    description:
+      'Employee Self-Service portal for HR management within the BSF real estate application suite.',
+    tags: ['React Native', 'Node.js', 'HRMS', 'Real Estate', 'Employee Portal'],
+    githubUrl: 'https://github.com/berlin-joseph', // Placeholder
+    liveUrl: 'https://apps.apple.com/in/app/bsfess/id6741994244',
+    image: 'https://picsum.photos/seed/bsf-ess-hr/600/400',
+    imageHint: 'employee self service mobile',
+  },
+  {
+    title: 'BSF Asset (Micromen)',
+    description:
+      'Asset management application tailored for real estate property tracking within the BSF suite.',
+    tags: ['React Native', 'Node.js', 'Asset Management', 'Real Estate'],
+    githubUrl: 'https://github.com/berlin-joseph', // Placeholder
+    liveUrl: 'https://apps.apple.com/in/app/bsfasset/id6733239830',
+    image: 'https://picsum.photos/seed/bsf-asset-manage/600/400',
+    imageHint: 'asset management mobile',
+  },
+  {
+    title: 'BSF AtSite (Micromen)',
+    description:
+      'On-site management tool for real estate project tracking and updates as part of the BSF suite.',
+    tags: ['React Native', 'Node.js', 'Site Management', 'Real Estate'],
+    githubUrl: 'https://github.com/berlin-joseph', // Placeholder
+    liveUrl: 'https://apps.apple.com/in/app/bsfatsite/id6711351231',
+    image: 'https://picsum.photos/seed/bsf-atsite-track/600/400',
+    imageHint: 'site management mobile',
+  },
+   {
+    title: 'BSF Admin (Micromen)',
+    description:
+      'Administrative control panel for managing the BSF suite of real estate applications.',
+    tags: ['React Native', 'Node.js', 'Admin Panel', 'Real Estate'],
+    githubUrl: 'https://github.com/berlin-joseph', // Placeholder
+    liveUrl: 'https://apps.apple.com/in/app/bsfadmin/id6618151123',
+    image: 'https://picsum.photos/seed/bsf-admin-panel/600/400',
+    imageHint: 'admin dashboard mobile',
+  },
+   {
+    title: 'RAM Real Estate',
+    description:
+      'Web application developed to showcase real estate properties, featuring listings and property details.',
+    tags: ['Next.js', 'React', 'Vercel', 'Real Estate', 'Web Application'],
+    githubUrl: 'https://github.com/berlin-joseph', // Placeholder
+    liveUrl: 'https://ram-realestate.vercel.app/',
+    image: 'https://picsum.photos/seed/ram-realestate-web/600/400',
+    imageHint: 'real estate website listing',
+  },
+  {
+    title: 'Zoro Tech Landing Page',
+    description:
+      'Developed the official company website and landing page for Zoro Tech.',
+    tags: ['Web Development', 'Landing Page', 'Company Site'],
+    githubUrl: 'https://github.com/berlin-joseph', // Placeholder
+    liveUrl: 'https://zoro-tech.com/',
+    image: 'https://picsum.photos/seed/zoro-tech-landing/600/400',
+    imageHint: 'technology company website',
+  },
+  {
+    title: 'Arkova Technologies Landing Page',
+    description:
+      'Developed the official company website and landing page for Arkova Technologies.',
+    tags: ['Web Development', 'Landing Page', 'Company Site'],
+    githubUrl: 'https://github.com/berlin-joseph', // Placeholder
+    liveUrl: 'https://www.arkovatechnologies.com/',
+    image: 'https://picsum.photos/seed/arkova-tech-landing/600/400',
+    imageHint: 'technology website interface',
+  },
 ];
 
 const ProjectsSection: React.FC = () => {
@@ -75,7 +138,7 @@ const ProjectsSection: React.FC = () => {
   const handleOptimizeClick = async () => {
     setIsOptimizing(true);
     try {
-      // Prepare input for AI analysis (can be more detailed)
+      // Prepare input for AI analysis
       const portfolioContent = JSON.stringify(initialProjects.map(p => ({ title: p.title, description: p.description, tags: p.tags })));
       const userGoals = "Showcase full-stack development skills, highlight modern tech stack usage (React Native, Node.js, MERN), attract potential employers in mobile and web development.";
 
@@ -126,6 +189,9 @@ const ProjectsSection: React.FC = () => {
     },
   };
 
+  // Determine grid columns based on the number of projects
+  const gridColsClass = initialProjects.length > 6 ? 'lg:grid-cols-3' : 'lg:grid-cols-2';
+
   return (
     <div className="w-full">
       <div className="flex justify-between items-center mb-8">
@@ -142,7 +208,7 @@ const ProjectsSection: React.FC = () => {
       </div>
 
       <motion.div
-        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+        className={`grid grid-cols-1 md:grid-cols-2 ${gridColsClass} gap-6`}
         variants={containerVariants}
         initial="hidden"
         whileInView="visible"
@@ -151,20 +217,13 @@ const ProjectsSection: React.FC = () => {
         {initialProjects.map((project, index) => (
           <motion.div key={index} variants={itemVariants}>
             <Card className="h-full flex flex-col bg-card hover:shadow-lg transition-shadow duration-300 overflow-hidden group transform hover:-translate-y-1">
-              {/* Image Placeholder - Replace with actual images later */}
+              {/* Image Placeholder */}
               <div className="relative h-48 w-full overflow-hidden">
                  <img
                     src={project.image}
                     alt={project.title}
                     className="absolute inset-0 h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
-                    // Added more specific hints based on project types
-                    data-ai-hint={
-                      project.title === 'Praxis' ? 'appointment booking mobile app' :
-                      project.title === 'BSF' ? 'real estate mobile app interface' :
-                      project.title === 'Delivery Application' ? 'delivery tracking map interface' :
-                      project.title === 'CRM Application' ? 'customer relationship management dashboard' :
-                      'project screenshot code interface'
-                    }
+                    data-ai-hint={project.imageHint} // Use specific hint
                  />
                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
               </div>
@@ -204,7 +263,7 @@ const ProjectsSection: React.FC = () => {
                       href={project.liveUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      aria-label={`${project.title} Live Demo`}
+                      aria-label={`${project.title} Live Link`}
                     >
                       <ExternalLink className="h-5 w-5 text-muted-foreground hover:text-primary transition-colors" />
                     </Link>

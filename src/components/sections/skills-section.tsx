@@ -3,9 +3,9 @@ import React from 'react';
 import {Badge} from '@/components/ui/badge';
 import SectionHeading from '@/components/ui/section-heading';
 import {motion} from 'framer-motion';
-import { Code, Database, Cloud, Settings, Smile } from 'lucide-react'; // Import icons
+import { Code, Database, Cloud, Settings, Smile, Server, Smartphone } from 'lucide-react'; // Added Server, Smartphone icons
 
-// Updated skill categories based on user input
+// Updated skill categories based on user's README
 const skillCategories = [
   {
     title: 'Programming Languages',
@@ -14,13 +14,18 @@ const skillCategories = [
   },
    {
     title: 'Frontend Development',
-    skills: ['React', 'React Native', 'Redux Toolkit', 'TanStack Query', 'Tailwind CSS', 'Material UI', 'Ant Design', 'Next.js'],
+    skills: ['React', 'Redux Toolkit', 'TanStack Query', 'Tailwind CSS', 'Material UI', 'Ant Design', 'Next.js'],
     icon: Code, // Reusing Code icon for frontend frameworks
+  },
+   {
+    title: 'Mobile Development',
+    skills: ['React Native'],
+    icon: Smartphone,
   },
   {
     title: 'Backend Development',
     skills: ['Node.js', 'Express.js', 'RESTful APIs', 'GraphQL', 'Sequelize'],
-    icon: Settings, // Using Settings icon for backend
+    icon: Server, // Using Server icon for backend
   },
   {
     title: 'Databases & ORMs',
@@ -67,7 +72,7 @@ const SkillsSection: React.FC = () => {
     <div className="w-full max-w-5xl mx-auto"> {/* Increased max-width slightly */}
       <SectionHeading>My Technical Skills</SectionHeading>
       <motion.div
-        className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8" // Added lg:grid-cols-3 for better layout on larger screens
+        className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8" // Adjusted grid for more categories
         variants={containerVariants}
         initial="hidden"
         whileInView="visible"
