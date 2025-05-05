@@ -27,41 +27,45 @@ interface Project {
   image: string;
 }
 
+// Updated with user's projects
 const initialProjects: Project[] = [
   {
-    title: 'E-commerce Platform',
+    title: 'Praxis',
     description:
-      'A full-featured e-commerce platform with user authentication, product catalog, shopping cart, and payment integration.',
-    tags: ['React', 'Node.js', 'Express', 'MongoDB', 'Stripe'],
-    githubUrl: 'https://github.com/berlin-joseph', // Placeholder
-    liveUrl: '#', // Placeholder
-    image: 'https://picsum.photos/seed/ecommerce/600/400',
+      'A real-time appointment booking app connecting patients and doctors seamlessly. Features integrated push notifications and real-time updates.',
+    tags: ['React Native', 'Node.js', 'WebSocket', 'Redux Toolkit', 'Push Notifications'],
+    githubUrl: 'https://github.com/berlin-joseph', // Placeholder - update if available
+    // liveUrl: '#', // Add live URL if available
+    image: 'https://picsum.photos/seed/praxis-app/600/400',
   },
   {
-    title: 'Task Management App',
+    title: 'BSF',
     description:
-      'A collaborative task management application allowing users to create projects, assign tasks, and track progress.',
-    tags: ['Next.js', 'TypeScript', 'Firebase', 'Tailwind CSS'],
-    githubUrl: 'https://github.com/berlin-joseph', // Placeholder
-    image: 'https://picsum.photos/seed/taskapp/600/400',
-  },
-  {
-    title: 'Portfolio Website V1',
-    description:
-      'My previous portfolio website showcasing earlier projects and skills. Built with focus on performance and animations.',
-    tags: ['HTML', 'CSS', 'JavaScript', 'GSAP'],
-    liveUrl: '#', // Placeholder
-    image: 'https://picsum.photos/seed/portfolio/600/400',
+      'A real estate mobile application for property listings and secure transaction management. Optimized state handling with Redux Toolkit & RTK Query.',
+    tags: ['React Native', 'Redux Toolkit', 'RTK Query', 'Firebase', 'Secure Transactions'],
+    githubUrl: 'https://github.com/berlin-joseph', // Placeholder - update if available
+    // liveUrl: '#', // Add live URL if available
+    image: 'https://picsum.photos/seed/bsf-app/600/400',
   },
    {
-    title: 'Data Visualization Dashboard',
+    title: 'Delivery Application',
     description:
-      'An interactive dashboard for visualizing complex datasets using various chart types and filtering options.',
-    tags: ['React', 'D3.js', 'Redux', 'Material UI'],
-    githubUrl: 'https://github.com/berlin-joseph', // Placeholder
-    liveUrl: '#', // Placeholder
-    image: 'https://picsum.photos/seed/dataviz/600/400',
+      'A robust MERN stack delivery application enabling real-time order tracking, route optimization, secure payments, and notification systems.',
+    tags: ['React', 'Node.js', 'Express', 'MongoDB', 'CI/CD', 'Payment Gateway'],
+    githubUrl: 'https://github.com/berlin-joseph', // Placeholder - update if available
+    // liveUrl: '#', // Add live URL if available
+    image: 'https://picsum.photos/seed/delivery-app/600/400',
   },
+  {
+    title: 'CRM Application',
+    description:
+      'Feature-rich CRM application built with React Native and Node.js, featuring optimized backend architecture for enhanced customer engagement.',
+    tags: ['React Native', 'Node.js', 'Jest', 'React Testing Library', 'API Optimization'],
+    githubUrl: 'https://github.com/berlin-joseph', // Placeholder - update if available
+    // liveUrl: '#', // Add live URL if available
+    image: 'https://picsum.photos/seed/crm-app/600/400',
+  },
+  // Add more projects if needed, or remove if fewer than 4
 ];
 
 const ProjectsSection: React.FC = () => {
@@ -73,7 +77,7 @@ const ProjectsSection: React.FC = () => {
     try {
       // Prepare input for AI analysis (can be more detailed)
       const portfolioContent = JSON.stringify(initialProjects.map(p => ({ title: p.title, description: p.description, tags: p.tags })));
-      const userGoals = "Showcase full-stack development skills, highlight modern tech stack usage, attract potential employers.";
+      const userGoals = "Showcase full-stack development skills, highlight modern tech stack usage (React Native, Node.js, MERN), attract potential employers in mobile and web development.";
 
       const suggestions = await optimizePortfolio({ portfolioContent, userGoals });
 
@@ -81,14 +85,14 @@ const ProjectsSection: React.FC = () => {
       toast({
         title: "AI Optimization Suggestions",
         description: (
-          <div className="text-sm">
-            <p><strong>Layout:</strong> {suggestions.suggestedLayout}</p>
-            <p><strong>Wording:</strong> {suggestions.suggestedWording}</p>
-            <p><strong>Colors:</strong> {suggestions.suggestedColorSchemes}</p>
-            <p><strong>Animations:</strong> {suggestions.suggestedAnimations}</p>
+          <div className="text-sm max-h-60 overflow-y-auto">
+            <p className="font-semibold mb-1">Layout:</p> <p className="mb-2">{suggestions.suggestedLayout}</p>
+            <p className="font-semibold mb-1">Wording:</p> <p className="mb-2">{suggestions.suggestedWording}</p>
+            <p className="font-semibold mb-1">Colors:</p> <p className="mb-2">{suggestions.suggestedColorSchemes}</p>
+            <p className="font-semibold mb-1">Animations:</p> <p>{suggestions.suggestedAnimations}</p>
           </div>
         ),
-        duration: 15000, // Show for longer
+        duration: 20000, // Show for longer
       });
 
     } catch (error) {
@@ -153,7 +157,14 @@ const ProjectsSection: React.FC = () => {
                     src={project.image}
                     alt={project.title}
                     className="absolute inset-0 h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
-                    data-ai-hint="project screenshot code"
+                    // Added more specific hints based on project types
+                    data-ai-hint={
+                      project.title === 'Praxis' ? 'appointment booking mobile app' :
+                      project.title === 'BSF' ? 'real estate mobile app interface' :
+                      project.title === 'Delivery Application' ? 'delivery tracking map interface' :
+                      project.title === 'CRM Application' ? 'customer relationship management dashboard' :
+                      'project screenshot code interface'
+                    }
                  />
                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
               </div>

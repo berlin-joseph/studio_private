@@ -1,7 +1,6 @@
 'use client';
 import React from 'react';
 import {Tabs, TabsContent, TabsList, TabsTrigger} from '@/components/ui/tabs';
-import {Card, CardHeader, CardTitle, CardDescription, CardContent} from '@/components/ui/card';
 import SectionHeading from '@/components/ui/section-heading';
 import {motion} from 'framer-motion';
 
@@ -10,44 +9,56 @@ interface Experience {
   role: string;
   duration: string;
   description: string[];
+  value: string; // Unique value for TabsTrigger
 }
 
 const experiences: Experience[] = [
-  {
-    company: 'Tech Solutions Inc.',
-    role: 'Full Stack Developer',
-    duration: 'Jan 2022 - Present',
+   {
+    company: 'Feather Software Solutions',
+    role: 'MERN Stack Developer',
+    duration: 'July 2024 - Nov 2024',
     description: [
-      'Developed and maintained web applications using React, Node.js, and PostgreSQL.',
-      'Collaborated with cross-functional teams to define, design, and ship new features.',
-      'Improved application performance by 20% through code optimization and database tuning.',
-      'Implemented automated testing suites, increasing code coverage by 30%.',
+      'Built a robust delivery application enabling real-time order tracking and management.',
+      'Improved delivery efficiency by 40% through route optimization and analytics.',
+      'Integrated secure payment gateways and notification systems, increasing user satisfaction by 30%.',
+      'Led a team to implement CI/CD pipelines, cutting deployment time by 35%.',
     ],
+    value: 'feather',
   },
   {
-    company: 'WebCrafters Co.',
-    role: 'Junior Developer',
-    duration: 'June 2021 - Dec 2021',
+    company: 'Micromen Software Solutions',
+    role: 'Application Developer',
+    duration: 'Jan 2024 - June 2024',
     description: [
-      'Assisted senior developers in building client websites using HTML, CSS, and JavaScript.',
-      'Participated in code reviews and contributed to improving code quality.',
-      'Gained experience with version control systems like Git.',
-      'Developed responsive layouts ensuring cross-browser compatibility.',
+      'Developed a feature-rich CRM application with React Native and Node.js, enhancing customer engagement by 40%.',
+      'Optimized backend architecture, reducing API latency by 40% and increasing throughput.',
+      'Achieved 95% test coverage using Jest and React Testing Library.',
     ],
+    value: 'micromen',
   },
-  // Add more experiences as needed
+  {
+    company: 'Paladin Software Solutions',
+    role: 'Junior Software Developer',
+    duration: 'Jan 2023 - Jan 2024',
+    description: [
+      'Designed scalable mobile applications with React Native, improving development speed by 20%.',
+      'Streamlined state management using Redux Toolkit, reducing code complexity by 30%.',
+      'Boosted app performance by 25% with lazy loading and efficient code-splitting.',
+    ],
+    value: 'paladin',
+  },
 ];
 
 const ExperienceSection: React.FC = () => {
   return (
     <div className="w-full max-w-3xl mx-auto">
        <SectionHeading>Where I've Worked</SectionHeading>
-      <Tabs defaultValue={experiences[0].company} className="flex flex-col md:flex-row gap-6 md:gap-10 mt-8">
+      <Tabs defaultValue={experiences[0].value} className="flex flex-col md:flex-row gap-6 md:gap-10 mt-8">
         <TabsList className="flex flex-row md:flex-col md:w-48 h-auto bg-transparent p-0 overflow-x-auto md:overflow-x-visible">
-          {experiences.map((exp, index) => (
+          {experiences.map((exp) => (
             <TabsTrigger
-              key={exp.company}
-              value={exp.company}
+              key={exp.value}
+              value={exp.value}
               className="justify-start text-left w-full px-4 py-3 whitespace-nowrap md:whitespace-normal data-[state=active]:bg-accent data-[state=active]:text-primary data-[state=active]:shadow-none relative after:absolute after:left-0 after:top-0 after:bottom-0 after:w-0.5 after:bg-primary after:scale-y-0 data-[state=active]:after:scale-y-100 after:transition-transform after:duration-300 md:border-l-2 md:border-border md:data-[state=active]:border-primary md:after:hidden"
             >
               {exp.company}
@@ -56,7 +67,7 @@ const ExperienceSection: React.FC = () => {
         </TabsList>
         <div className="flex-1">
           {experiences.map((exp) => (
-             <TabsContent key={exp.company} value={exp.company} className="mt-0">
+             <TabsContent key={exp.value} value={exp.value} className="mt-0">
                <motion.div
                  initial={{ opacity: 0, y: 20 }}
                  animate={{ opacity: 1, y: 0 }}

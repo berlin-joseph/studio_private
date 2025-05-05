@@ -16,23 +16,18 @@ const AboutSection: React.FC = () => {
       >
         <SectionHeading>About Me</SectionHeading>
         <p>
-          Hello! I'm Berlin, a passionate Full Stack Developer based somewhere
-          on Earth. My journey into web development started years ago, driven
-          by a fascination with how the internet works and a desire to create
-          meaningful digital solutions.
+           Hello! I'm Berlin, a Full-Stack Software Developer based in Nagercoil, India.
+           I specialize in building scalable and user-centric applications using the latest technologies.
+           My journey into web development was driven by a passion for solving complex problems and creating impactful digital solutions.
         </p>
         <p>
-          With 3 years of professional experience, I've had the opportunity to
-          work on a diverse range of projects, honing my skills in both
-          front-end and back-end technologies. I thrive in collaborative
-          environments and enjoy tackling complex problems to deliver
-          high-quality, performant, and user-friendly applications.
+          With professional experience starting from January 2023, I've had the opportunity to
+          work on diverse projects, strengthening my skills in both frontend and backend development.
+          I thrive in collaborative environments and aim to deliver seamless, high-quality applications.
         </p>
-        <p>
-          When I'm not coding, you might find me exploring new technologies,
-          contributing to open-source projects, or enjoying the great outdoors.
-          I'm always eager to learn and grow, both personally and
-          professionally.
+         <p>
+          Beyond coding, I enjoy exploring new technologies, contributing to the developer community,
+          and continuously learning to enhance my skills.
         </p>
       </motion.div>
       <motion.div
@@ -44,13 +39,14 @@ const AboutSection: React.FC = () => {
       >
         <div className="relative w-64 h-64 sm:w-80 sm:h-80 rounded-lg overflow-hidden shadow-xl group">
           <div className="absolute inset-0 bg-primary opacity-20 group-hover:opacity-0 transition-opacity duration-300 z-10"></div>
+          {/* Consider replacing with an actual photo */}
           <Image
-            src="https://picsum.photos/400/400"
+            src="https://picsum.photos/seed/berlin-profile/400/400"
             alt="Berlin Joe L"
             layout="fill"
             objectFit="cover"
             className="rounded-lg transform group-hover:scale-105 transition-transform duration-300"
-            data-ai-hint="professional portrait developer"
+            data-ai-hint="professional portrait developer man indian"
           />
            <div className="absolute inset-0 border-2 border-primary rounded-lg transform translate-x-2 translate-y-2 group-hover:translate-x-0 group-hover:translate-y-0 transition-transform duration-300 pointer-events-none"></div>
         </div>

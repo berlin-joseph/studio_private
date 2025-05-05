@@ -1,7 +1,7 @@
 'use client';
 import React from 'react';
 import Link from 'next/link';
-import {Github, Linkedin, Twitter} from 'lucide-react'; // Assuming Twitter icon usage
+import {Github, Linkedin} from 'lucide-react'; // Removed Twitter
 import {motion} from 'framer-motion';
 
 const socialLinks = [
@@ -12,19 +12,20 @@ const socialLinks = [
   },
   {
     name: 'LinkedIn',
-    url: '#', // Add LinkedIn URL
+    url: 'https://www.linkedin.com/in/berlinjoel/',
     icon: Linkedin,
   },
-   {
-    name: 'Twitter',
-    url: '#', // Add Twitter URL
-    icon: Twitter,
-  },
+ // {
+ //   name: 'Twitter',
+ //   url: '#', // Add Twitter URL if available
+ //   icon: Twitter,
+ // },
   // Add more social links as needed
 ];
 
 const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
+  const userEmail = 'l.berlinjoe@hotmail.com';
 
   return (
     <motion.footer
@@ -56,8 +57,8 @@ const Footer: React.FC = () => {
         {/* Email fixed at bottom right for smaller screens */}
        <div className="fixed bottom-0 right-0 p-4 md:hidden z-40">
          <div className="flex flex-col items-center space-y-4 after:content-[''] after:block after:w-px after:h-24 after:bg-muted-foreground after:mt-4">
-            <a href="mailto:berlin.joseph@example.com" className="writing-mode-vertical-rl rotate-180 text-xs font-mono text-muted-foreground hover:text-primary transition-colors duration-300 tracking-widest">
-                berlin.joseph@example.com {/* Replace with actual email */}
+            <a href={`mailto:${userEmail}`} className="writing-mode-vertical-rl rotate-180 text-xs font-mono text-muted-foreground hover:text-primary transition-colors duration-300 tracking-widest">
+                {userEmail}
             </a>
          </div>
        </div>

@@ -26,6 +26,8 @@ const ContactSection: React.FC = () => {
     },
   };
 
+  const userEmail = 'l.berlinjoe@hotmail.com';
+
 
   return (
     <motion.div
@@ -56,7 +58,7 @@ const ContactSection: React.FC = () => {
       </motion.p>
       <motion.div variants={itemVariants}>
         <Button asChild size="lg" className="group">
-          <a href="mailto:berlin.joseph@example.com"> {/* Replace with actual email */}
+          <a href={`mailto:${userEmail}`}>
             Say Hello <Mail className="ml-2 h-5 w-5" />
           </a>
         </Button>

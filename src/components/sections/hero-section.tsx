@@ -37,6 +37,13 @@ const HeroSection: React.FC = () => {
     }
   };
 
+  // Calculate years of experience dynamically (approximate)
+  const startDate = new Date(2023, 0); // January 2023
+  const currentDate = new Date();
+  const yearsExperience = Math.floor((currentDate.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24 * 365));
+  const experienceText = yearsExperience > 0 ? `${yearsExperience}+ year${yearsExperience > 1 ? 's' : ''}` : 'under a year';
+
+
   return (
     <motion.div
       className="flex flex-col items-start justify-center min-h-[calc(100vh-5rem)] pt-20" // Adjust padding-top to account for header height
@@ -66,10 +73,9 @@ const HeroSection: React.FC = () => {
         className="max-w-xl text-foreground opacity-90 mb-10 text-base sm:text-lg"
         variants={itemVariants}
       >
-        I'm a Full Stack Developer with 3 years of industry experience,
-        specializing in building (and occasionally designing) exceptional
-        digital experiences. Currently, I'm focused on creating accessible,
-        user-centered products.
+        I'm a Full-Stack Software Developer with {experienceText} of industry experience,
+        specializing in building scalable and user-centric applications. Currently, I'm focused on creating accessible,
+        impactful digital solutions using the latest technologies.
       </motion.p>
       <motion.div variants={itemVariants}>
         <Button asChild size="lg" className="group">
