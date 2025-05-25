@@ -6,15 +6,16 @@ import SectionHeading from '@/components/ui/section-heading';
 
 const AboutSection: React.FC = () => {
   return (
-    <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
+    // Center content vertically within the section
+    <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-16 w-full max-w-5xl mx-auto">
       <motion.div
-        className="lg:w-1/2 text-foreground opacity-90 space-y-4 text-base sm:text-lg"
+        className="lg:w-3/5 text-foreground/90 space-y-5 text-base sm:text-lg leading-relaxed" // Increased leading, adjusted width ratio
         initial={{opacity: 0, x: -50}}
         whileInView={{opacity: 1, x: 0}}
         viewport={{once: true, amount: 0.3}}
-        transition={{duration: 0.6}}
+        transition={{duration: 0.6, ease: 'easeOut'}}
       >
-        <SectionHeading>About Me</SectionHeading>
+        <SectionHeading sectionNumber="01.">About Me</SectionHeading>
         <p>
            Hello! I'm Berlin, a Full-Stack Software Developer based in Nagercoil, India.
            I specialize in building scalable and user-centric applications using the latest technologies.
@@ -27,28 +28,32 @@ const AboutSection: React.FC = () => {
         </p>
          <p>
           Beyond coding, I enjoy exploring new technologies, contributing to the developer community,
-          and continuously learning to enhance my skills.
+          and continuously learning to enhance my skills. I'm always looking for opportunities to build impactful solutions.
         </p>
       </motion.div>
       <motion.div
-        className="lg:w-1/2 flex justify-center lg:justify-end"
+        className="lg:w-2/5 flex justify-center lg:justify-end mt-8 lg:mt-0" // Adjusted width ratio and margin
         initial={{opacity: 0, x: 50}}
         whileInView={{opacity: 1, x: 0}}
         viewport={{once: true, amount: 0.3}}
         transition={{duration: 0.6, delay: 0.2}}
       >
-        <div className="relative w-64 h-64 sm:w-80 sm:h-80 rounded-lg overflow-hidden shadow-xl group">
-          <div className="absolute inset-0 bg-primary opacity-20 group-hover:opacity-0 transition-opacity duration-300 z-10"></div>
-          {/* Consider replacing with an actual photo */}
+        {/* Image styling improvements */}
+        <div className="relative w-64 h-64 sm:w-72 sm:h-72 lg:w-80 lg:h-80 rounded-lg group"> {/* Slightly larger on larger screens */}
+          {/* Subtle background overlay */}
+           <div className="absolute inset-0 bg-primary/10 rounded-lg z-10 group-hover:bg-transparent transition-colors duration-300"></div>
+           {/* Image with hover effect */}
           <Image
             src="https://picsum.photos/seed/berlin-profile/400/400"
             alt="Berlin Joe L"
-            layout="fill"
-            objectFit="cover"
-            className="rounded-lg transform group-hover:scale-105 transition-transform duration-300"
+            width={400}
+            height={400}
+            className="rounded-lg object-cover w-full h-full transform group-hover:scale-105 transition-transform duration-300 filter grayscale group-hover:grayscale-0" // Grayscale effect
             data-ai-hint="professional portrait developer man indian"
+            priority // Prioritize loading this image
           />
-           <div className="absolute inset-0 border-2 border-primary rounded-lg transform translate-x-2 translate-y-2 group-hover:translate-x-0 group-hover:translate-y-0 transition-transform duration-300 pointer-events-none"></div>
+           {/* Border accent */}
+           <div className="absolute -inset-1 border-2 border-primary/50 rounded-lg transition-all duration-300 group-hover:border-primary group-hover:-inset-2 pointer-events-none"></div>
         </div>
       </motion.div>
     </div>

@@ -1,7 +1,8 @@
+
 'use client';
 import React, {useState, useEffect} from 'react';
 import Link from 'next/link';
-import {Button} from '@/components/ui/button';
+import {Button, buttonVariants} from '@/components/ui/button';
 import {Sheet, SheetContent, SheetTrigger} from '@/components/ui/sheet';
 import {Menu, X} from 'lucide-react';
 import {motion} from 'framer-motion';
@@ -22,29 +23,36 @@ export default function Header() {
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
+      const currentScrollY = window.scrollY;
+      setIsScrolled(currentScrollY > 50);
 
-      let currentSection = 'hero';
-      navItems.forEach((item) => {
-        const section = document.getElementById(item.href.substring(1));
-        if (section && window.scrollY >= section.offsetTop - 100) {
-          // Adjust offset as needed
-          currentSection = item.href.substring(1);
+      // Determine active section based on scroll position
+      let currentSection = 'hero'; // Default to hero
+      const sections = [
+        'hero',
+        ...navItems.map(item => item.href.substring(1)),
+      ];
+
+      for (let i = sections.length - 1; i >= 0; i--) {
+        const sectionId = sections[i];
+        const sectionElement = document.getElementById(sectionId);
+        // Offset by header height (80px) + a little extra (20px) for better accuracy
+        const offset = 100;
+        if (sectionElement && currentScrollY >= sectionElement.offsetTop - offset) {
+            currentSection = sectionId;
+            break; // Found the current section, exit loop
         }
-      });
-      // Check hero section explicitly
-      const heroSection = document.getElementById('hero');
-      if (heroSection && window.scrollY < heroSection.offsetHeight - 100) {
-        currentSection = 'hero';
       }
       setActiveSection(currentSection);
     };
 
+
     window.addEventListener('scroll', handleScroll);
-    handleScroll(); // Set initial state
+    handleScroll(); // Set initial state on mount
 
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, []); // Rerun only on mount/unmount
+
 
   const handleNavLinkClick = (
     e: React.MouseEvent<HTMLAnchorElement>,
@@ -54,10 +62,8 @@ export default function Header() {
     const targetId = href.substring(1);
     const targetElement = document.getElementById(targetId);
     if (targetElement) {
-      window.scrollTo({
-        top: targetElement.offsetTop - 80, // Adjust offset for fixed header
-        behavior: 'smooth',
-      });
+        // Let smooth scrolling with scroll-padding-top handle the offset
+        targetElement.scrollIntoView({ behavior: 'smooth' });
     }
     setIsMobileMenuOpen(false); // Close mobile menu on link click
   };
@@ -68,25 +74,26 @@ export default function Header() {
       animate={{y: 0}}
       transition={{duration: 0.5, ease: 'easeOut'}}
       className={cn(
-        'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
+        'fixed top-0 left-0 right-0 z-50 transition-all duration-300 h-20', // Consistent height
         isScrolled
-          ? 'bg-background/80 backdrop-blur-md shadow-md'
+          ? 'bg-background/90 backdrop-blur-lg shadow-md' // More pronounced effect on scroll
           : 'bg-transparent'
       )}
     >
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      {/* Use a container for consistent padding and centering */}
+      <div className="container mx-auto px-6 sm:px-10 lg:px-16 flex items-center justify-between h-full">
         {/* Logo/Name */}
         <Link href="#hero" passHref legacyBehavior>
           <a
             onClick={(e) => handleNavLinkClick(e, '#hero')}
-            className="text-2xl font-bold text-primary cursor-pointer hover:text-primary/80 transition-colors"
+            className="text-xl sm:text-2xl font-bold text-primary cursor-pointer hover:text-primary/80 transition-colors duration-300"
           >
             BJL
           </a>
         </Link>
 
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center space-x-6">
+        <nav className="hidden md:flex items-center space-x-6 lg:space-x-8">
           {navItems.map((item, index) => (
             <Link key={item.name} href={item.href} passHref legacyBehavior>
               <motion.a
@@ -95,7 +102,7 @@ export default function Header() {
                 transition={{duration: 0.3, delay: 0.1 * index}}
                 onClick={(e) => handleNavLinkClick(e, item.href)}
                 className={cn(
-                  'text-sm font-medium transition-colors relative',
+                  'text-sm font-medium transition-colors duration-300 relative pb-1', // Added padding-bottom for underline space
                   activeSection === item.href.substring(1)
                     ? 'text-primary'
                     : 'text-foreground hover:text-primary'
@@ -105,7 +112,7 @@ export default function Header() {
                 {activeSection === item.href.substring(1) && (
                   <motion.span
                     layoutId="underline"
-                    className="absolute left-0 -bottom-1 block h-[2px] w-full bg-primary"
+                    className="absolute left-0 bottom-0 block h-[2px] w-full bg-primary" // Underline positioned at the bottom
                     transition={{type: 'spring', stiffness: 300, damping: 30}}
                   />
                 )}
@@ -129,53 +136,58 @@ export default function Header() {
             open={isMobileMenuOpen}
             onOpenChange={setIsMobileMenuOpen}
           >
-            <SheetTrigger asChild>
-              <Button variant="ghost" size="icon">
-                <Menu className="h-6 w-6 text-primary" />
-                <span className="sr-only">Open menu</span>
-              </Button>
+            <SheetTrigger
+              className={cn(
+                buttonVariants({ variant: "ghost", size: "icon" }),
+                "text-primary hover:bg-accent"
+              )}
+            >
+              <Menu className="h-6 w-6" />
+              <span className="sr-only">Open menu</span>
             </SheetTrigger>
-            <SheetContent side="right" className="w-[250px] bg-background">
-              <div className="flex flex-col h-full">
-                <div className="flex justify-between items-center p-4 border-b">
-                  <Link href="#hero" passHref legacyBehavior>
-                    <a
-                      onClick={(e) => handleNavLinkClick(e, '#hero')}
-                      className="text-xl font-bold text-primary"
-                    >
-                      BJL
-                    </a>
-                  </Link>
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    onClick={() => setIsMobileMenuOpen(false)}
-                  >
-                    <X className="h-6 w-6" />
-                    <span className="sr-only">Close menu</span>
-                  </Button>
-                </div>
-                <nav className="flex flex-col space-y-4 p-4 mt-6">
+            {/* Use inset-y-0 and right-0 for proper positioning */}
+            <SheetContent side="right" className="w-[280px] bg-background p-0 flex flex-col">
+              {/* Header inside sheet */}
+               <div className="flex justify-between items-center p-4 border-b border-border h-20">
+                 <Link href="#hero" passHref legacyBehavior>
+                   <a
+                     onClick={(e) => handleNavLinkClick(e, '#hero')}
+                     className="text-xl font-bold text-primary"
+                   >
+                     BJL
+                   </a>
+                 </Link>
+                 <Button
+                   variant="ghost"
+                   size="icon"
+                   onClick={() => setIsMobileMenuOpen(false)}
+                   className="text-foreground hover:bg-accent"
+                 >
+                   <X className="h-6 w-6" />
+                   <span className="sr-only">Close menu</span>
+                 </Button>
+               </div>
+               {/* Navigation links */}
+                <nav className="flex flex-col space-y-5 p-6 mt-4 flex-grow">
                   {navItems.map((item) => (
                     <Link key={item.name} href={item.href} passHref legacyBehavior>
                       <a
                         onClick={(e) => handleNavLinkClick(e, item.href)}
                         className={cn(
-                          'text-lg font-medium transition-colors',
-                          activeSection === item.href.substring(1)
-                            ? 'text-primary'
-                            : 'text-foreground hover:text-primary'
+                          'text-base font-medium transition-colors duration-300 py-2 text-center rounded-md',
+                           activeSection === item.href.substring(1)
+                            ? 'text-primary bg-accent'
+                            : 'text-foreground hover:text-primary hover:bg-accent/50'
                         )}
                       >
                         {item.name}
                       </a>
                     </Link>
                   ))}
-                  <Button variant="outline" className="mt-6">
+                   <Button variant="outline" className="mt-auto w-full"> {/* Button at the bottom */}
                     Resume
                   </Button>
                 </nav>
-              </div>
             </SheetContent>
           </Sheet>
         </div>

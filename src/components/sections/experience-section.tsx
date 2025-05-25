@@ -3,6 +3,7 @@ import React from 'react';
 import {Tabs, TabsContent, TabsList, TabsTrigger} from '@/components/ui/tabs';
 import SectionHeading from '@/components/ui/section-heading';
 import {motion} from 'framer-motion';
+import { CheckCircle } from 'lucide-react'; // Import an icon for list items
 
 interface Experience {
   company: string;
@@ -52,38 +53,41 @@ const experiences: Experience[] = [
 
 const ExperienceSection: React.FC = () => {
   return (
-    <div className="w-full max-w-3xl mx-auto">
-       <SectionHeading>Where I've Worked</SectionHeading>
-      <Tabs defaultValue={experiences[0].value} className="flex flex-col md:flex-row gap-6 md:gap-10 mt-8">
-        <TabsList className="flex flex-row md:flex-col md:w-48 h-auto bg-transparent p-0 overflow-x-auto md:overflow-x-visible">
+    <div className="w-full max-w-4xl mx-auto"> {/* Slightly increased max-width */}
+       <SectionHeading sectionNumber="02.">Where I've Worked</SectionHeading>
+      <Tabs defaultValue={experiences[0].value} className="flex flex-col md:flex-row gap-8 md:gap-10 mt-10" orientation="vertical"> {/* Explicitly set orientation */}
+        {/* Improved TabsList styling */}
+        <TabsList className="flex flex-row md:flex-col md:w-48 h-auto bg-transparent p-0 overflow-x-auto md:overflow-visible md:border-l-2 border-border md:pr-2"> {/* Added border, padding */}
           {experiences.map((exp) => (
             <TabsTrigger
               key={exp.value}
               value={exp.value}
-              className="justify-start text-left w-full px-4 py-3 whitespace-nowrap md:whitespace-normal data-[state=active]:bg-accent data-[state=active]:text-primary data-[state=active]:shadow-none relative after:absolute after:left-0 after:top-0 after:bottom-0 after:w-0.5 after:bg-primary after:scale-y-0 data-[state=active]:after:scale-y-100 after:transition-transform after:duration-300 md:border-l-2 md:border-border md:data-[state=active]:border-primary md:after:hidden"
+              className="w-full text-left justify-start px-4 py-3 whitespace-nowrap md:whitespace-normal text-muted-foreground hover:bg-accent/50 hover:text-primary data-[state=active]:bg-accent data-[state=active]:text-primary data-[state=active]:shadow-none relative border-l-2 border-transparent data-[state=active]:border-primary -ml-px transition-all duration-200" // Enhanced active/hover states
             >
               {exp.company}
             </TabsTrigger>
           ))}
         </TabsList>
-        <div className="flex-1">
+        <div className="flex-1 md:pl-4"> {/* Added padding */}
           {experiences.map((exp) => (
-             <TabsContent key={exp.value} value={exp.value} className="mt-0">
+             <TabsContent key={exp.value} value={exp.value} className="mt-0 focus-visible:ring-0 focus-visible:ring-offset-0"> {/* Removed focus ring */}
                <motion.div
-                 initial={{ opacity: 0, y: 20 }}
+                 key={exp.value} // Add key for animation consistency on tab change
+                 initial={{ opacity: 0, y: 15 }}
                  animate={{ opacity: 1, y: 0 }}
-                 transition={{ duration: 0.5 }}
+                 exit={{ opacity: 0, y: -15 }} // Add exit animation
+                 transition={{ duration: 0.3, ease: 'easeOut' }}
                >
-                <h3 className="text-xl font-semibold text-foreground mb-1">
+                <h3 className="text-xl sm:text-2xl font-semibold text-foreground mb-1"> {/* Increased font size */}
                   {exp.role}{' '}
-                  <span className="text-primary">@ {exp.company}</span>
+                  <span className="text-primary font-medium">@ {exp.company}</span> {/* Adjusted weight */}
                 </h3>
-                <p className="text-sm text-muted-foreground mb-4 font-mono">{exp.duration}</p>
-                <ul className="space-y-2 list-none pl-0">
+                <p className="text-sm text-muted-foreground mb-5 font-mono">{exp.duration}</p> {/* Increased margin */}
+                <ul className="space-y-3 list-none pl-0"> {/* Increased spacing */}
                   {exp.description.map((point, i) => (
-                    <li key={i} className="flex items-start">
-                       <span className="text-primary mr-2 mt-1">&#8227;</span> {/* Bullet point */}
-                       <span className="text-foreground opacity-90">{point}</span>
+                    <li key={i} className="flex items-start text-base"> {/* Use text-base */}
+                       <CheckCircle className="text-primary mr-3 mt-1 h-4 w-4 flex-shrink-0" /> {/* Use CheckCircle icon */}
+                       <span className="text-foreground/90 leading-relaxed">{point}</span> {/* Increased line height */}
                     </li>
                   ))}
                 </ul>

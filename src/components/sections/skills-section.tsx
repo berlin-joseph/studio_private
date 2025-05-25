@@ -3,7 +3,7 @@ import React from 'react';
 import {Badge} from '@/components/ui/badge';
 import SectionHeading from '@/components/ui/section-heading';
 import {motion} from 'framer-motion';
-import { Code, Database, Cloud, Settings, Smile, Server, Smartphone } from 'lucide-react'; // Added Server, Smartphone icons
+import { Code, Database, Cloud, Settings, Smile, Server, Smartphone, LayoutGrid } from 'lucide-react'; // Added LayoutGrid for Frontend
 
 // Updated skill categories based on user's README
 const skillCategories = [
@@ -14,8 +14,8 @@ const skillCategories = [
   },
    {
     title: 'Frontend Development',
-    skills: ['React', 'Redux Toolkit', 'TanStack Query', 'Tailwind CSS', 'Material UI', 'Ant Design', 'Next.js'],
-    icon: Code, // Reusing Code icon for frontend frameworks
+    skills: ['React', 'Next.js', 'Redux Toolkit', 'TanStack Query', 'Tailwind CSS', 'Material UI', 'Ant Design'],
+    icon: LayoutGrid, // Using LayoutGrid icon for frontend
   },
    {
     title: 'Mobile Development',
@@ -39,7 +39,7 @@ const skillCategories = [
   },
   {
     title: 'Development Tools',
-    skills: ['Git', 'Postman', 'VSCode', 'Docker', 'Jira', 'CI/CD Pipelines'],
+    skills: ['Git', 'Docker', 'Postman', 'VSCode', 'Jira', 'CI/CD Pipelines'],
     icon: Settings, // Reusing Settings icon for tools
   },
    {
@@ -54,7 +54,7 @@ const SkillsSection: React.FC = () => {
     hidden: {},
     visible: {
       transition: {
-        staggerChildren: 0.1, // Slightly faster stagger
+        staggerChildren: 0.08, // Even faster stagger
       },
     },
   };
@@ -69,10 +69,10 @@ const SkillsSection: React.FC = () => {
   };
 
   return (
-    <div className="w-full max-w-5xl mx-auto"> {/* Increased max-width slightly */}
-      <SectionHeading>My Technical Skills</SectionHeading>
+    <div className="w-full max-w-6xl mx-auto"> {/* Wider max-width */}
+      <SectionHeading sectionNumber="04.">My Technical Skills</SectionHeading>
       <motion.div
-        className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8" // Adjusted grid for more categories
+        className="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-8 gap-y-10" // Adjusted gap
         variants={containerVariants}
         initial="hidden"
         whileInView="visible"
@@ -80,16 +80,19 @@ const SkillsSection: React.FC = () => {
       >
         {skillCategories.map((category) => (
           <motion.div key={category.title} variants={itemVariants} className="flex flex-col"> {/* Ensure flex column layout */}
-            <h3 className="text-lg font-semibold text-primary mb-4 flex items-center">
-               {category.icon && <category.icon className="mr-2 h-5 w-5" />} {/* Added icon */}
+            {/* Category Title Styling */}
+            <h3 className="text-lg font-semibold text-primary mb-5 flex items-center gap-2"> {/* Increased bottom margin */}
+               {category.icon && <category.icon className="h-5 w-5" />}
               {category.title}
             </h3>
+            {/* Badge Container */}
             <div className="flex flex-wrap gap-2">
               {category.skills.map((skill) => (
                 <Badge
                   key={skill}
                   variant="outline"
-                  className="text-sm px-3 py-1 border-primary/50 text-foreground hover:bg-primary/10 hover:text-primary transition-colors cursor-default" // Adjusted styling slightly
+                  // Enhanced badge styling
+                  className="text-sm font-medium px-3 py-1 border-border bg-secondary/50 text-secondary-foreground/90 hover:bg-accent hover:text-accent-foreground hover:border-primary/50 transition-all duration-200 cursor-default shadow-sm"
                 >
                   {skill}
                 </Badge>

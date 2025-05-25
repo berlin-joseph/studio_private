@@ -86,25 +86,22 @@ body {
   * {
     @apply border-border;
   }
-  body {
-    @apply bg-background text-foreground;
+  html {
     /* Add smooth scrolling */
     scroll-behavior: smooth;
+    /* Offset scroll position for fixed header (adjust h-20 based on actual header height) */
+    scroll-padding-top: theme(spacing.20);
   }
-  /* Simple fade-in animation */
-  .fade-in-section {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-  }
-  .fade-in-section.is-visible {
-    opacity: 1;
-    transform: translateY(0);
+  body {
+    @apply bg-background text-foreground;
   }
 
   /* Section base styling */
   section {
-    @apply min-h-screen py-20 px-4 sm:px-8 md:px-16 lg:px-24 xl:px-32;
+    /* Simplified padding */
+    @apply min-h-screen py-20 px-6 sm:px-10 md:px-16 lg:px-20;
+    /* Ensure sections are flex containers for centering content */
+    @apply flex flex-col justify-center;
   }
 }
 

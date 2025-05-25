@@ -10,8 +10,9 @@ import ContactSection from '@/components/sections/contact-section';
 import Footer from '@/components/layout/footer';
 import {useEffect, useRef} from 'react';
 import {motion, useInView, useAnimation} from 'framer-motion';
+import { cn } from '@/lib/utils';
 
-const SectionWrapper: FC<{children: React.ReactNode; id: string}> = ({children, id}) => {
+const SectionWrapper: FC<{children: React.ReactNode; id: string; className?: string}> = ({children, id, className}) => {
   const ref = useRef(null);
   const isInView = useInView(ref, {once: true, amount: 0.2});
   const controls = useAnimation();
@@ -23,6 +24,7 @@ const SectionWrapper: FC<{children: React.ReactNode; id: string}> = ({children, 
   }, [isInView, controls]);
 
   return (
+    // Apply base section styles via globals.css @layer base section
     <motion.section
       id={id}
       ref={ref}
@@ -33,7 +35,7 @@ const SectionWrapper: FC<{children: React.ReactNode; id: string}> = ({children, 
       initial="hidden"
       animate={controls}
       transition={{duration: 0.6, ease: 'easeOut'}}
-      className="min-h-screen py-20 px-4 sm:px-8 md:px-16 lg:px-24 xl:px-32 flex flex-col justify-center"
+      className={cn(className)} // Allow additional classes if needed
     >
       {children}
     </motion.section>
@@ -46,7 +48,7 @@ export default function Home() {
     <div className="flex flex-col min-h-screen">
       <Header />
       <main className="flex-grow">
-        <SectionWrapper id="hero">
+        <SectionWrapper id="hero" className="min-h-[calc(100vh-5rem)] pt-20"> {/* Adjusted hero section height */}
           <HeroSection />
         </SectionWrapper>
         <SectionWrapper id="about">

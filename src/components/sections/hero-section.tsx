@@ -2,7 +2,7 @@
 import React from 'react';
 import {Button} from '@/components/ui/button';
 import {motion} from 'framer-motion';
-import Link from 'next/link';
+// import Link from 'next/link'; // Link is no longer used directly here
 import {ArrowRight} from 'lucide-react';
 
 const HeroSection: React.FC = () => {
@@ -11,8 +11,8 @@ const HeroSection: React.FC = () => {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.2,
-        delayChildren: 0.3,
+        staggerChildren: 0.15, // Slightly faster stagger
+        delayChildren: 0.2, // Slightly faster delay
       },
     },
   };
@@ -22,7 +22,7 @@ const HeroSection: React.FC = () => {
     visible: {
       opacity: 1,
       y: 0,
-      transition: {duration: 0.6, ease: 'easeOut'},
+      transition: {duration: 0.5, ease: 'easeOut'}, // Slightly faster transition
     },
   };
 
@@ -30,10 +30,8 @@ const HeroSection: React.FC = () => {
     e.preventDefault();
     const contactSection = document.getElementById('contact');
     if (contactSection) {
-      window.scrollTo({
-        top: contactSection.offsetTop - 80, // Adjust offset
-        behavior: 'smooth',
-      });
+       // Let smooth scrolling with scroll-padding-top handle the offset
+       contactSection.scrollIntoView({ behavior: 'smooth' });
     }
   };
 
@@ -45,32 +43,35 @@ const HeroSection: React.FC = () => {
 
 
   return (
+    // Ensure the container uses the available vertical space minus the header height
+    // `flex-grow` is handled by the main layout, we just need vertical centering here
     <motion.div
-      className="flex flex-col items-start justify-center min-h-[calc(100vh-5rem)] pt-20" // Adjust padding-top to account for header height
+      className="flex flex-col justify-center max-w-3xl" // Max width for content
       variants={containerVariants}
       initial="hidden"
       animate="visible"
+       // Removed min-h-screen and pt-20 as section wrapper handles it
     >
       <motion.p
-        className="text-primary font-mono mb-4 text-base sm:text-lg"
+        className="text-primary font-mono mb-3 sm:mb-4 text-base sm:text-lg" // Reduced bottom margin
         variants={itemVariants}
       >
         Hi, my name is
       </motion.p>
       <motion.h1
-        className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-foreground mb-4"
+        className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-foreground mb-2 sm:mb-3" // Added font-extrabold, reduced margin
         variants={itemVariants}
       >
         Berlin Joe L.
       </motion.h1>
       <motion.h2
-        className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-secondary-foreground opacity-80 mb-6"
+        className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-foreground/80 mb-6 sm:mb-8" // Use foreground with opacity, adjusted margin
         variants={itemVariants}
       >
         I build things for the web.
       </motion.h2>
       <motion.p
-        className="max-w-xl text-foreground opacity-90 mb-10 text-base sm:text-lg"
+        className="max-w-xl text-foreground/90 mb-8 sm:mb-10 text-base sm:text-lg leading-relaxed" // Adjusted margin, added leading-relaxed
         variants={itemVariants}
       >
         I'm a Full-Stack Software Developer with {experienceText} of industry experience,
@@ -78,11 +79,11 @@ const HeroSection: React.FC = () => {
         impactful digital solutions using the latest technologies.
       </motion.p>
       <motion.div variants={itemVariants}>
-        <Button asChild size="lg" className="group">
-          <Link href="#contact" onClick={handleContactClick}>
+        <Button asChild size="lg" className="group shadow-md hover:shadow-lg transition-shadow duration-300">
+          <a href="#contact" onClick={handleContactClick} className="flex items-center"> {/* Use <a> tag directly */}
             Get In Touch
             <ArrowRight className="ml-2 h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
-          </Link>
+          </a>
         </Button>
       </motion.div>
     </motion.div>
