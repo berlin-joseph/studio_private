@@ -1,7 +1,7 @@
 // @ts-nocheck
 'use client';
 import React, {useState} from 'react';
-import Image from 'next/image';
+// import Image from 'next/image'; // Image removed
 import {
   Card,
   CardHeader,
@@ -13,7 +13,7 @@ import {
 import {Badge} from '@/components/ui/badge';
 import {Button} from '@/components/ui/button';
 import Link from 'next/link';
-import {Github, ExternalLink, Loader2, Wand2} from 'lucide-react'; // Added Wand2 icon
+import {Github, ExternalLink, Loader2, Wand2} from 'lucide-react';
 import SectionHeading from '@/components/ui/section-heading';
 import {motion} from 'framer-motion';
 import {optimizePortfolio} from '@/ai/flows/portfolio-optimization';
@@ -26,109 +26,88 @@ interface Project {
   tags: string[];
   githubUrl?: string;
   liveUrl?: string;
-  image: string; 
-  imageHint: string; 
+  // image: string; // Image property removed
+  // imageHint: string; // Image hint removed
 }
 
-// Updated with user's projects and details from README
 const initialProjects: Project[] = [
   {
     title: 'Delivery Application (Feather)',
     description:
       'A robust MERN stack delivery application enabling real-time order tracking, route optimization, secure payments, and notification systems.',
     tags: ['React', 'Node.js', 'Express', 'MongoDB', 'CI/CD', 'Payment Gateway'],
-    githubUrl: 'https://github.com/berlin-joseph', // Placeholder
-    image: 'https://placehold.co/600x400.png', 
-    imageHint: 'delivery tracking map interface',
+    githubUrl: 'https://github.com/berlin-joseph',
   },
    {
     title: 'Praxis (Paladin)',
     description:
       'A real-time appointment booking app connecting patients and doctors seamlessly using React Native, Node.js, and WebSocket. Features integrated push notifications and real-time updates, boosting user engagement by 45%.',
     tags: ['React Native', 'Node.js', 'WebSocket', 'Redux Toolkit', 'Push Notifications'],
-    githubUrl: 'https://github.com/berlin-joseph', // Placeholder
-    image: 'https://placehold.co/600x400.png',
-    imageHint: 'appointment mobile doctor patient',
+    githubUrl: 'https://github.com/berlin-joseph',
   },
   {
     title: 'BSF Sale (Micromen)',
     description:
       'Real estate sales CRM application for managing leads, properties, and transactions within the BSF suite. Built with React Native and Node.js, optimized state handling with Redux Toolkit & RTK Query.',
     tags: ['React Native', 'Node.js', 'CRM', 'Real Estate', 'Redux Toolkit', 'RTK Query'],
-    githubUrl: 'https://github.com/berlin-joseph', // Placeholder
+    githubUrl: 'https://github.com/berlin-joseph',
     liveUrl: 'https://apps.apple.com/in/app/bsfsale/id6502038086',
-    image: 'https://placehold.co/600x400.png', 
-    imageHint: 'real estate crm mobile sales',
   },
    {
     title: 'BSF ESS (Micromen)',
     description:
       'Employee Self-Service portal built with React Native and Node.js for HR management within the BSF real estate application suite.',
     tags: ['React Native', 'Node.js', 'HRMS', 'Real Estate', 'Employee Portal'],
-    githubUrl: 'https://github.com/berlin-joseph', // Placeholder
+    githubUrl: 'https://github.com/berlin-joseph',
     liveUrl: 'https://apps.apple.com/in/app/bsfess/id6741994244',
-    image: 'https://placehold.co/600x400.png', 
-    imageHint: 'employee self service mobile hr',
   },
   {
     title: 'BSF Asset (Micromen)',
     description:
       'Asset management application tailored for real estate property tracking within the BSF suite, developed using React Native and Node.js.',
     tags: ['React Native', 'Node.js', 'Asset Management', 'Real Estate'],
-    githubUrl: 'https://github.com/berlin-joseph', // Placeholder
+    githubUrl: 'https://github.com/berlin-joseph',
     liveUrl: 'https://apps.apple.com/in/app/bsfasset/id6733239830',
-    image: 'https://placehold.co/600x400.png', 
-    imageHint: 'asset management mobile dashboard',
   },
   {
     title: 'BSF AtSite (Micromen)',
     description:
       'On-site management tool built with React Native and Node.js for real estate project tracking and updates as part of the BSF suite.',
     tags: ['React Native', 'Node.js', 'Site Management', 'Real Estate'],
-    githubUrl: 'https://github.com/berlin-joseph', // Placeholder
+    githubUrl: 'https://github.com/berlin-joseph',
     liveUrl: 'https://apps.apple.com/in/app/bsfatsite/id6711351231',
-    image: 'https://placehold.co/600x400.png', 
-    imageHint: 'site management mobile construction',
   },
    {
     title: 'BSF Admin (Micromen)',
     description:
       'Administrative control panel built with React Native and Node.js for managing the BSF suite of real estate applications.',
     tags: ['React Native', 'Node.js', 'Admin Panel', 'Real Estate'],
-    githubUrl: 'https://github.com/berlin-joseph', // Placeholder
+    githubUrl: 'https://github.com/berlin-joseph',
     liveUrl: 'https://apps.apple.com/in/app/bsfadmin/id6618151123',
-    image: 'https://placehold.co/600x400.png', 
-    imageHint: 'admin dashboard mobile control',
   },
    {
     title: 'RAM Real Estate',
     description:
       'Web application developed with Next.js to showcase real estate properties, featuring listings and property details. Deployed on Vercel.',
     tags: ['Next.js', 'React', 'Vercel', 'Real Estate', 'Web Application'],
-    githubUrl: 'https://github.com/berlin-joseph', // Placeholder link, replace if actual exists
+    githubUrl: 'https://github.com/berlin-joseph', 
     liveUrl: 'https://ram-realestate.vercel.app/',
-    image: 'https://placehold.co/600x400.png', 
-    imageHint: 'real estate website property',
   },
   {
     title: 'Zoro Tech Landing Page',
     description:
       'Developed the official company website and landing page for Zoro Tech, showcasing their services and brand identity.',
-    tags: ['Web Development', 'Landing Page', 'Company Site', 'HTML', 'CSS', 'JavaScript'], // Added generic tags
-    githubUrl: 'https://github.com/berlin-joseph', // Placeholder link, replace if actual exists
+    tags: ['Web Development', 'Landing Page', 'Company Site', 'HTML', 'CSS', 'JavaScript'],
+    githubUrl: 'https://github.com/berlin-joseph',
     liveUrl: 'https://zoro-tech.com/',
-    image: 'https://placehold.co/600x400.png', 
-    imageHint: 'technology company website modern',
   },
   {
     title: 'Arkova Technologies Landing Page',
     description:
       'Developed the official company website and landing page for Arkova Technologies, presenting their solutions and expertise.',
-    tags: ['Web Development', 'Landing Page', 'Company Site', 'HTML', 'CSS', 'JavaScript'], // Added generic tags
-    githubUrl: 'https://github.com/berlin-joseph', // Placeholder link, replace if actual exists
+    tags: ['Web Development', 'Landing Page', 'Company Site', 'HTML', 'CSS', 'JavaScript'],
+    githubUrl: 'https://github.com/berlin-joseph',
     liveUrl: 'https://www.arkovatechnologies.com/',
-    image: 'https://placehold.co/600x400.png',
-    imageHint: 'technology website professional interface',
   },
 ];
 
@@ -139,13 +118,11 @@ const ProjectsSection: React.FC = () => {
   const handleOptimizeClick = async () => {
     setIsOptimizing(true);
     try {
-      // Prepare input for AI analysis
       const portfolioContent = JSON.stringify(initialProjects.map(p => ({ title: p.title, description: p.description, tags: p.tags })));
       const userGoals = "Showcase full-stack development skills, highlight modern tech stack usage (React Native, Node.js, MERN, Next.js), attract potential employers in mobile and web development.";
 
       const suggestions = await optimizePortfolio({ portfolioContent, userGoals });
 
-      // Display suggestions (example using toast)
       toast({
         title: "AI Optimization Suggestions",
         description: (
@@ -156,7 +133,7 @@ const ProjectsSection: React.FC = () => {
             <p className="font-semibold mb-1 text-primary">Animations:</p> <p className="text-foreground/90">{suggestions.suggestedAnimations}</p>
           </div>
         ),
-        duration: 30000, // Show for longer
+        duration: 30000, 
       });
 
     } catch (error) {
@@ -190,21 +167,20 @@ const ProjectsSection: React.FC = () => {
     },
   };
 
-  // Determine grid columns based on the number of projects
   const gridColsClass = initialProjects.length > 6 ? 'lg:grid-cols-3' : 'lg:grid-cols-2';
 
   return (
-    <div className="w-full max-w-7xl mx-auto"> {/* Wider max-width */}
-       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-10"> {/* Adjusted alignment and margin */}
+    <div className="w-full max-w-7xl mx-auto">
+       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-10">
         <SectionHeading className="mb-4 sm:mb-0" sectionNumber="03.">Some Things I've Built</SectionHeading>
-         <Button onClick={handleOptimizeClick} disabled={isOptimizing} size="sm" className="shadow-sm hover:shadow-md transition-shadow"> {/* Changed variant, size */}
+         <Button onClick={handleOptimizeClick} disabled={isOptimizing} size="sm" className="shadow-sm hover:shadow-md transition-shadow">
           {isOptimizing ? (
             <>
               <Loader2 className="mr-2 h-4 w-4 animate-spin" /> Optimizing...
             </>
           ) : (
             <>
-             <Wand2 className="mr-2 h-4 w-4" /> Optimize with AI {/* Added icon */}
+             <Wand2 className="mr-2 h-4 w-4" /> Optimize with AI
             </>
           )}
         </Button>
@@ -218,34 +194,34 @@ const ProjectsSection: React.FC = () => {
         viewport={{once: true, amount: 0.1}}
       >
         {initialProjects.map((project, index) => (
-          <motion.div key={project.title} variants={itemVariants}> {/* Use project title as key */}
-            {/* Card styling improvements */}
-            <Card className="h-full flex flex-col bg-card border border-border/50 hover:border-primary/30 hover:shadow-lg transition-all duration-300 overflow-hidden group transform hover:-translate-y-1.5">
-              {/* Image section removed */}
-              <CardHeader className="pb-3 pt-5 px-5"> {/* Adjusted top padding */}
+          <motion.div key={project.title} variants={itemVariants}>
+            <Card className={cn(
+                "h-full flex flex-col bg-card/80 backdrop-blur-sm border-border/60",
+                "hover:border-primary/50 shadow-md hover:shadow-lg hover:shadow-primary/20", // Adjusted hover shadow
+                "transition-all duration-300 overflow-hidden group transform hover:-translate-y-1" // Slightly less translate
+              )}>
+              <CardHeader className="pb-3 pt-5 px-5">
                 <CardTitle className="text-lg font-semibold text-foreground group-hover:text-primary transition-colors duration-200">
                   {project.title}
                 </CardTitle>
               </CardHeader>
-              <CardContent className="flex-grow pb-4 px-5"> {/* Adjusted padding */}
-                <CardDescription className="text-sm text-muted-foreground mb-4 line-clamp-3"> {/* Line clamp description */}
+              <CardContent className="flex-grow pb-4 px-5">
+                <CardDescription className="text-sm text-muted-foreground mb-4 line-clamp-4"> {/* Increased line-clamp slightly */}
                   {project.description}
                 </CardDescription>
-                {/* Tag styling */}
                 <div className="flex flex-wrap gap-2">
                   {project.tags.map((tag) => (
                     <Badge 
                       key={tag} 
-                      variant="outline" 
-                      className="text-xs font-medium border-primary/40 text-primary/90 hover:bg-primary/10"
+                      variant="outline" // Use outline variant for tags by default
+                      className="text-xs font-medium border-primary/50 text-primary/90 hover:bg-primary/15" // Adjusted styling
                     >
                       {tag}
                     </Badge>
                   ))}
                 </div>
               </CardContent>
-              {/* Footer styling */}
-              <CardFooter className="flex justify-end space-x-2 pt-2 pb-4 px-5 border-t border-border/30 mt-auto"> {/* Added border, spacing */}
+              <CardFooter className="flex justify-end space-x-2 pt-3 pb-4 px-5 border-t border-border/40 mt-auto"> {/* Slightly adjusted padding and border */}
                 {project.githubUrl && (
                   <Link href={project.githubUrl} passHref legacyBehavior target="_blank" rel="noopener noreferrer" aria-label={`${project.title} GitHub Repository`}>
                     <Button variant="ghost" size="icon" className="text-muted-foreground hover:text-primary transition-colors">

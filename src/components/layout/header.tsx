@@ -26,8 +26,7 @@ export default function Header() {
       const currentScrollY = window.scrollY;
       setIsScrolled(currentScrollY > 50);
 
-      // Determine active section based on scroll position
-      let currentSection = 'hero'; // Default to hero
+      let currentSection = 'hero'; 
       const sections = [
         'hero',
         ...navItems.map(item => item.href.substring(1)),
@@ -36,11 +35,10 @@ export default function Header() {
       for (let i = sections.length - 1; i >= 0; i--) {
         const sectionId = sections[i];
         const sectionElement = document.getElementById(sectionId);
-        // Offset by header height (80px) + a little extra (20px) for better accuracy
-        const offset = 100;
+        const offset = 100; 
         if (sectionElement && currentScrollY >= sectionElement.offsetTop - offset) {
             currentSection = sectionId;
-            break; // Found the current section, exit loop
+            break; 
         }
       }
       setActiveSection(currentSection);
@@ -48,10 +46,10 @@ export default function Header() {
 
 
     window.addEventListener('scroll', handleScroll);
-    handleScroll(); // Set initial state on mount
+    handleScroll(); 
 
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []); // Rerun only on mount/unmount
+  }, []); 
 
 
   const handleNavLinkClick = (
@@ -62,10 +60,9 @@ export default function Header() {
     const targetId = href.substring(1);
     const targetElement = document.getElementById(targetId);
     if (targetElement) {
-        // Let smooth scrolling with scroll-padding-top handle the offset
         targetElement.scrollIntoView({ behavior: 'smooth' });
     }
-    setIsMobileMenuOpen(false); // Close mobile menu on link click
+    setIsMobileMenuOpen(false); 
   };
 
   return (
@@ -74,15 +71,13 @@ export default function Header() {
       animate={{y: 0}}
       transition={{duration: 0.5, ease: 'easeOut'}}
       className={cn(
-        'fixed top-0 left-0 right-0 z-50 transition-all duration-300 h-20', // Consistent height
+        'fixed top-0 left-0 right-0 z-50 transition-all duration-300 h-20',
         isScrolled
-          ? 'bg-background/90 backdrop-blur-lg shadow-md' // More pronounced effect on scroll
+          ? 'bg-background/80 backdrop-blur-md shadow-lg' // Adjusted blur and shadow
           : 'bg-transparent'
       )}
     >
-      {/* Use a container for consistent padding and centering */}
       <div className="container mx-auto px-6 sm:px-10 lg:px-16 flex items-center justify-between h-full">
-        {/* Logo/Name */}
         <Link href="#hero" passHref legacyBehavior>
           <a
             onClick={(e) => handleNavLinkClick(e, '#hero')}
@@ -92,7 +87,6 @@ export default function Header() {
           </a>
         </Link>
 
-        {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center space-x-6 lg:space-x-8">
           {navItems.map((item, index) => (
             <Link key={item.name} href={item.href} passHref legacyBehavior>
@@ -102,20 +96,13 @@ export default function Header() {
                 transition={{duration: 0.3, delay: 0.1 * index}}
                 onClick={(e) => handleNavLinkClick(e, item.href)}
                 className={cn(
-                  'text-sm font-medium transition-colors duration-300 relative pb-1', // Added padding-bottom for underline space
+                  'text-sm transition-colors duration-300 relative py-1', 
                   activeSection === item.href.substring(1)
-                    ? 'text-primary'
-                    : 'text-foreground hover:text-primary'
+                    ? 'text-primary font-semibold' // Changed active style
+                    : 'text-foreground/70 hover:text-primary font-medium' // Changed inactive and hover style
                 )}
               >
                 {item.name}
-                {activeSection === item.href.substring(1) && (
-                  <motion.span
-                    layoutId="underline"
-                    className="absolute left-0 bottom-0 block h-[2px] w-full bg-primary" // Underline positioned at the bottom
-                    transition={{type: 'spring', stiffness: 300, damping: 30}}
-                  />
-                )}
               </motion.a>
             </Link>
           ))}
@@ -130,7 +117,6 @@ export default function Header() {
           </motion.div>
         </nav>
 
-        {/* Mobile Navigation Trigger */}
         <div className="md:hidden">
           <Sheet
             open={isMobileMenuOpen}
@@ -145,9 +131,7 @@ export default function Header() {
               <Menu className="h-6 w-6" />
               <span className="sr-only">Open menu</span>
             </SheetTrigger>
-            {/* Use inset-y-0 and right-0 for proper positioning */}
             <SheetContent side="right" className="w-[280px] bg-background p-0 flex flex-col">
-              {/* Header inside sheet */}
                <div className="flex justify-between items-center p-4 border-b border-border h-20">
                  <Link href="#hero" passHref legacyBehavior>
                    <a
@@ -167,7 +151,6 @@ export default function Header() {
                    <span className="sr-only">Close menu</span>
                  </Button>
                </div>
-               {/* Navigation links */}
                 <nav className="flex flex-col space-y-5 p-6 mt-4 flex-grow">
                   {navItems.map((item) => (
                     <Link key={item.name} href={item.href} passHref legacyBehavior>
@@ -176,7 +159,7 @@ export default function Header() {
                         className={cn(
                           'text-base font-medium transition-colors duration-300 py-2 text-center rounded-md',
                            activeSection === item.href.substring(1)
-                            ? 'text-primary bg-accent'
+                            ? 'text-primary bg-accent font-semibold' // Changed active style
                             : 'text-foreground hover:text-primary hover:bg-accent/50'
                         )}
                       >
@@ -184,7 +167,7 @@ export default function Header() {
                       </a>
                     </Link>
                   ))}
-                   <Button variant="outline" className="mt-auto w-full"> {/* Button at the bottom */}
+                   <Button variant="outline" className="mt-auto w-full"> 
                     Resume
                   </Button>
                 </nav>
