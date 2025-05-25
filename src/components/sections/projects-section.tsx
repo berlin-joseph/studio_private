@@ -1,3 +1,4 @@
+
 // @ts-nocheck
 'use client';
 import React, {useState} from 'react';
@@ -18,6 +19,7 @@ import SectionHeading from '@/components/ui/section-heading';
 import {motion} from 'framer-motion';
 import {optimizePortfolio} from '@/ai/flows/portfolio-optimization';
 import {useToast} from '@/hooks/use-toast';
+import { cn } from '@/lib/utils';
 
 interface Project {
   title: string;
@@ -37,7 +39,7 @@ const initialProjects: Project[] = [
       'A robust MERN stack delivery application enabling real-time order tracking, route optimization, secure payments, and notification systems.',
     tags: ['React', 'Node.js', 'Express', 'MongoDB', 'CI/CD', 'Payment Gateway'],
     githubUrl: 'https://github.com/berlin-joseph', // Placeholder
-    image: 'https://placehold.co/600x400.png', // Updated placeholder
+    image: 'https://placehold.co/600x400.png', 
     imageHint: 'delivery tracking map interface',
   },
    {
@@ -46,7 +48,7 @@ const initialProjects: Project[] = [
       'A real-time appointment booking app connecting patients and doctors seamlessly using React Native, Node.js, and WebSocket. Features integrated push notifications and real-time updates, boosting user engagement by 45%.',
     tags: ['React Native', 'Node.js', 'WebSocket', 'Redux Toolkit', 'Push Notifications'],
     githubUrl: 'https://github.com/berlin-joseph', // Placeholder
-    image: 'https://placehold.co/600x400.png', // Updated placeholder
+    image: 'https://placehold.co/600x400.png',
     imageHint: 'appointment mobile doctor patient',
   },
   {
@@ -56,7 +58,7 @@ const initialProjects: Project[] = [
     tags: ['React Native', 'Node.js', 'CRM', 'Real Estate', 'Redux Toolkit', 'RTK Query'],
     githubUrl: 'https://github.com/berlin-joseph', // Placeholder
     liveUrl: 'https://apps.apple.com/in/app/bsfsale/id6502038086',
-    image: 'https://placehold.co/600x400.png', // Updated placeholder
+    image: 'https://placehold.co/600x400.png', 
     imageHint: 'real estate crm mobile sales',
   },
    {
@@ -66,7 +68,7 @@ const initialProjects: Project[] = [
     tags: ['React Native', 'Node.js', 'HRMS', 'Real Estate', 'Employee Portal'],
     githubUrl: 'https://github.com/berlin-joseph', // Placeholder
     liveUrl: 'https://apps.apple.com/in/app/bsfess/id6741994244',
-    image: 'https://placehold.co/600x400.png', // Updated placeholder
+    image: 'https://placehold.co/600x400.png', 
     imageHint: 'employee self service mobile hr',
   },
   {
@@ -76,7 +78,7 @@ const initialProjects: Project[] = [
     tags: ['React Native', 'Node.js', 'Asset Management', 'Real Estate'],
     githubUrl: 'https://github.com/berlin-joseph', // Placeholder
     liveUrl: 'https://apps.apple.com/in/app/bsfasset/id6733239830',
-    image: 'https://placehold.co/600x400.png', // Updated placeholder
+    image: 'https://placehold.co/600x400.png', 
     imageHint: 'asset management mobile dashboard',
   },
   {
@@ -86,7 +88,7 @@ const initialProjects: Project[] = [
     tags: ['React Native', 'Node.js', 'Site Management', 'Real Estate'],
     githubUrl: 'https://github.com/berlin-joseph', // Placeholder
     liveUrl: 'https://apps.apple.com/in/app/bsfatsite/id6711351231',
-    image: 'https://placehold.co/600x400.png', // Updated placeholder
+    image: 'https://placehold.co/600x400.png', 
     imageHint: 'site management mobile construction',
   },
    {
@@ -96,7 +98,7 @@ const initialProjects: Project[] = [
     tags: ['React Native', 'Node.js', 'Admin Panel', 'Real Estate'],
     githubUrl: 'https://github.com/berlin-joseph', // Placeholder
     liveUrl: 'https://apps.apple.com/in/app/bsfadmin/id6618151123',
-    image: 'https://placehold.co/600x400.png', // Updated placeholder
+    image: 'https://placehold.co/600x400.png', 
     imageHint: 'admin dashboard mobile control',
   },
    {
@@ -106,7 +108,7 @@ const initialProjects: Project[] = [
     tags: ['Next.js', 'React', 'Vercel', 'Real Estate', 'Web Application'],
     githubUrl: 'https://github.com/berlin-joseph', // Placeholder link, replace if actual exists
     liveUrl: 'https://ram-realestate.vercel.app/',
-    image: 'https://placehold.co/600x400.png', // Updated placeholder
+    image: 'https://placehold.co/600x400.png', 
     imageHint: 'real estate website property',
   },
   {
@@ -116,7 +118,7 @@ const initialProjects: Project[] = [
     tags: ['Web Development', 'Landing Page', 'Company Site', 'HTML', 'CSS', 'JavaScript'], // Added generic tags
     githubUrl: 'https://github.com/berlin-joseph', // Placeholder link, replace if actual exists
     liveUrl: 'https://zoro-tech.com/',
-    image: 'https://placehold.co/600x400.png', // Updated placeholder
+    image: 'https://placehold.co/600x400.png', 
     imageHint: 'technology company website modern',
   },
   {
@@ -126,7 +128,7 @@ const initialProjects: Project[] = [
     tags: ['Web Development', 'Landing Page', 'Company Site', 'HTML', 'CSS', 'JavaScript'], // Added generic tags
     githubUrl: 'https://github.com/berlin-joseph', // Placeholder link, replace if actual exists
     liveUrl: 'https://www.arkovatechnologies.com/',
-    image: 'https://placehold.co/600x400.png', // Updated placeholder
+    image: 'https://placehold.co/600x400.png',
     imageHint: 'technology website professional interface',
   },
 ];
@@ -195,7 +197,7 @@ const ProjectsSection: React.FC = () => {
   return (
     <div className="w-full max-w-7xl mx-auto"> {/* Wider max-width */}
        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-10"> {/* Adjusted alignment and margin */}
-        <SectionHeading className="mb-4 sm:mb-0">Some Things I've Built</SectionHeading>
+        <SectionHeading className="mb-4 sm:mb-0" sectionNumber="03.">Some Things I've Built</SectionHeading>
          <Button onClick={handleOptimizeClick} disabled={isOptimizing} size="sm" className="shadow-sm hover:shadow-md transition-shadow"> {/* Changed variant, size */}
           {isOptimizing ? (
             <>
@@ -247,7 +249,11 @@ const ProjectsSection: React.FC = () => {
                 {/* Tag styling */}
                 <div className="flex flex-wrap gap-2">
                   {project.tags.map((tag) => (
-                    <Badge key={tag} variant="secondary" className="text-xs font-medium bg-secondary/70 text-secondary-foreground/80">
+                    <Badge 
+                      key={tag} 
+                      variant="outline" 
+                      className="text-xs font-medium border-primary/40 text-primary/90 hover:bg-primary/10"
+                    >
                       {tag}
                     </Badge>
                   ))}

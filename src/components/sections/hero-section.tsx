@@ -1,9 +1,10 @@
+
 'use client';
 import React from 'react';
-import {Button} from '@/components/ui/button';
+import { buttonVariants } from '@/components/ui/button'; // Import buttonVariants
 import {motion} from 'framer-motion';
-// import Link from 'next/link'; // Link is no longer used directly here
 import {ArrowRight} from 'lucide-react';
+import { cn } from '@/lib/utils';
 
 const HeroSection: React.FC = () => {
   const containerVariants = {
@@ -79,12 +80,17 @@ const HeroSection: React.FC = () => {
         impactful digital solutions using the latest technologies.
       </motion.p>
       <motion.div variants={itemVariants}>
-        <Button asChild size="lg" className="group shadow-md hover:shadow-lg transition-shadow duration-300">
-          <a href="#contact" onClick={handleContactClick} className="flex items-center"> {/* Use <a> tag directly */}
-            Get In Touch
-            <ArrowRight className="ml-2 h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
-          </a>
-        </Button>
+        <a
+          href="#contact"
+          onClick={handleContactClick}
+          className={cn(
+            buttonVariants({ size: "lg" }),
+            "group shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-0.5 flex items-center"
+          )}
+        >
+          Get In Touch
+          <ArrowRight className="ml-2 h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
+        </a>
       </motion.div>
     </motion.div>
   );
