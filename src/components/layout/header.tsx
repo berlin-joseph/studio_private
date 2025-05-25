@@ -3,7 +3,12 @@
 import React, {useState, useEffect} from 'react';
 import Link from 'next/link';
 import {Button, buttonVariants} from '@/components/ui/button';
-import {Sheet, SheetContent, SheetTrigger} from '@/components/ui/sheet';
+import {
+  Sheet,
+  SheetContent,
+  SheetTrigger,
+  SheetTitle, // Imported SheetTitle
+} from '@/components/ui/sheet';
 import {Menu, X} from 'lucide-react';
 import {motion} from 'framer-motion';
 import {cn} from '@/lib/utils';
@@ -26,7 +31,7 @@ export default function Header() {
       const currentScrollY = window.scrollY;
       setIsScrolled(currentScrollY > 50);
 
-      let currentSection = 'hero'; 
+      let currentSection = 'hero';
       const sections = [
         'hero',
         ...navItems.map(item => item.href.substring(1)),
@@ -35,10 +40,10 @@ export default function Header() {
       for (let i = sections.length - 1; i >= 0; i--) {
         const sectionId = sections[i];
         const sectionElement = document.getElementById(sectionId);
-        const offset = 100; 
+        const offset = 100;
         if (sectionElement && currentScrollY >= sectionElement.offsetTop - offset) {
             currentSection = sectionId;
-            break; 
+            break;
         }
       }
       setActiveSection(currentSection);
@@ -46,10 +51,10 @@ export default function Header() {
 
 
     window.addEventListener('scroll', handleScroll);
-    handleScroll(); 
+    handleScroll();
 
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []); 
+  }, []);
 
 
   const handleNavLinkClick = (
@@ -62,7 +67,7 @@ export default function Header() {
     if (targetElement) {
         targetElement.scrollIntoView({ behavior: 'smooth' });
     }
-    setIsMobileMenuOpen(false); 
+    setIsMobileMenuOpen(false);
   };
 
   return (
@@ -73,7 +78,7 @@ export default function Header() {
       className={cn(
         'fixed top-0 left-0 right-0 z-50 transition-all duration-300 h-20',
         isScrolled
-          ? 'bg-background/80 backdrop-blur-md shadow-lg' // Adjusted blur and shadow
+          ? 'bg-background/80 backdrop-blur-md shadow-lg'
           : 'bg-transparent'
       )}
     >
@@ -96,10 +101,10 @@ export default function Header() {
                 transition={{duration: 0.3, delay: 0.1 * index}}
                 onClick={(e) => handleNavLinkClick(e, item.href)}
                 className={cn(
-                  'text-sm transition-colors duration-300 relative py-1', 
+                  'text-sm transition-colors duration-300 relative py-1',
                   activeSection === item.href.substring(1)
-                    ? 'text-primary font-semibold' // Changed active style
-                    : 'text-foreground/70 hover:text-primary font-medium' // Changed inactive and hover style
+                    ? 'text-primary font-semibold'
+                    : 'text-foreground/70 hover:text-primary font-medium'
                 )}
               >
                 {item.name}
@@ -133,6 +138,7 @@ export default function Header() {
             </SheetTrigger>
             <SheetContent side="right" className="w-[280px] bg-background p-0 flex flex-col">
                <div className="flex justify-between items-center p-4 border-b border-border h-20">
+                 <SheetTitle className="sr-only">Navigation Menu</SheetTitle> {/* Added sr-only SheetTitle */}
                  <Link href="#hero" passHref legacyBehavior>
                    <a
                      onClick={(e) => handleNavLinkClick(e, '#hero')}
@@ -146,6 +152,7 @@ export default function Header() {
                    size="icon"
                    onClick={() => setIsMobileMenuOpen(false)}
                    className="text-foreground hover:bg-accent"
+                   aria-label="Close menu"
                  >
                    <X className="h-6 w-6" />
                    <span className="sr-only">Close menu</span>
@@ -159,7 +166,7 @@ export default function Header() {
                         className={cn(
                           'text-base font-medium transition-colors duration-300 py-2 text-center rounded-md',
                            activeSection === item.href.substring(1)
-                            ? 'text-primary bg-accent font-semibold' // Changed active style
+                            ? 'text-primary bg-accent font-semibold'
                             : 'text-foreground hover:text-primary hover:bg-accent/50'
                         )}
                       >
@@ -167,7 +174,7 @@ export default function Header() {
                       </a>
                     </Link>
                   ))}
-                   <Button variant="outline" className="mt-auto w-full"> 
+                   <Button variant="outline" className="mt-auto w-full">
                     Resume
                   </Button>
                 </nav>
