@@ -44,10 +44,10 @@ const AboutSection: React.FC = () => {
            <div className="absolute inset-0 bg-primary/10 rounded-lg z-10 group-hover:bg-transparent transition-colors duration-300"></div>
            {/* Image with hover effect */}
           <Image
-            src="https://picsum.photos/seed/berlin-profile/400/400"
+            src="https://media.licdn.com/dms/image/v2/D5603AQG_4dylBvX4UQ/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1675790558997?e=1753920000&v=beta&t=XlzSrp5-uXj1ci9rbaQOnDh43GPfMNEMc2GQ0jDSDAs"
             alt="Berlin Joe L"
-            width={400}
-            height={400}
+            width={200}
+            height={200}
             className="rounded-lg object-cover w-full h-full transform group-hover:scale-105 transition-transform duration-300 filter grayscale group-hover:grayscale-0" // Grayscale effect
             data-ai-hint="professional portrait developer man indian"
             priority // Prioritize loading this image

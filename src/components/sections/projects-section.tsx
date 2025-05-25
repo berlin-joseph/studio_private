@@ -1,8 +1,7 @@
-
 // @ts-nocheck
 'use client';
 import React, {useState} from 'react';
-import Image from 'next/image'; // Import next/image
+// import Image from 'next/image'; // Image component no longer used here
 import {
   Card,
   CardHeader,
@@ -27,8 +26,8 @@ interface Project {
   tags: string[];
   githubUrl?: string;
   liveUrl?: string;
-  image: string;
-  imageHint: string; // Added for data-ai-hint
+  image: string; // Retained for potential future use or AI analysis, not for display
+  imageHint: string; // Retained for potential future use or AI analysis, not for display
 }
 
 // Updated with user's projects and details from README
@@ -222,22 +221,8 @@ const ProjectsSection: React.FC = () => {
           <motion.div key={project.title} variants={itemVariants}> {/* Use project title as key */}
             {/* Card styling improvements */}
             <Card className="h-full flex flex-col bg-card border border-border/50 hover:border-primary/30 hover:shadow-xl transition-all duration-300 overflow-hidden group transform hover:-translate-y-1.5">
-              {/* Image Placeholder with next/image */}
-              <div className="relative h-48 w-full overflow-hidden">
-                 <Image
-                    src={project.image}
-                    alt={project.title}
-                    fill // Use fill instead of layout="fill" and objectFit
-                    sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw" // Add sizes prop
-                    style={{ objectFit: 'cover' }} // Use inline style for objectFit
-                    className="transition-transform duration-300 group-hover:scale-105"
-                    data-ai-hint={project.imageHint} // Use specific hint
-                    priority={index < 3} // Prioritize loading first few images
-                 />
-                 {/* Gradient overlay */}
-                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
-              </div>
-              <CardHeader className="pb-3 pt-4 px-5"> {/* Adjusted padding */}
+              {/* Image section removed */}
+              <CardHeader className="pb-3 pt-5 px-5"> {/* Adjusted top padding */}
                 <CardTitle className="text-lg font-semibold text-foreground group-hover:text-primary transition-colors duration-200">
                   {project.title}
                 </CardTitle>
