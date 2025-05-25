@@ -1,6 +1,8 @@
 'use client';
 import React from 'react';
-import {Button} from '@/components/ui/button';
+import Link from 'next/link'; // Import Link
+import { buttonVariants } from '@/components/ui/button'; // Import buttonVariants
+import { cn } from '@/lib/utils'; // Import cn
 import SectionHeading from '@/components/ui/section-heading';
 import {motion} from 'framer-motion';
 import {Mail} from 'lucide-react';
@@ -56,11 +58,15 @@ const ContactSection: React.FC = () => {
         you!
        </p>
        <div> {/* Wrap button for stagger */}
-         <Button asChild size="lg" className="group shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-0.5"> {/* Enhanced button style */}
-          <a href={`mailto:${userEmail}`}>
-            Say Hello <Mail className="ml-2 h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" /> {/* Added icon animation */}
-          </a>
-        </Button>
+         <Link
+            href={`mailto:${userEmail}`}
+            className={cn(
+              buttonVariants({ size: "lg" }),
+              "group shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-0.5"
+            )}
+          >
+            Say Hello <Mail className="ml-2 h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
+          </Link>
        </div>
     </motion.div>
   );
