@@ -1,23 +1,29 @@
+
 'use client';
 import React from 'react';
 import {Badge} from '@/components/ui/badge';
 import SectionHeading from '@/components/ui/section-heading';
 import {motion} from 'framer-motion';
-import { Code, Database, Cloud, Settings, Smile, Server, Smartphone, LayoutGrid } from 'lucide-react'; // Added LayoutGrid for Frontend
+import { Code, Database, Cloud, Settings, Smile, Server, Smartphone, LayoutGrid, Layers, Brain, Workflow } from 'lucide-react'; // Added Layers, Brain, Workflow
 
-// Updated skill categories based on user's README
+// Updated skill categories based on user's proficiency
 const skillCategories = [
   {
     title: 'Programming Languages',
-    skills: ['JavaScript', 'TypeScript', 'HTML5', 'CSS3', 'SQL'],
+    skills: ['JavaScript', 'TypeScript', 'Python', 'HTML5', 'CSS3', 'SQL'], // Added Python as it's common for AI/ML
     icon: Code,
   },
-   {
-    title: 'Frontend Development',
-    skills: ['React', 'Next.js', 'Redux Toolkit', 'TanStack Query', 'Tailwind CSS', 'Material UI', 'Ant Design'],
-    icon: LayoutGrid, // Using LayoutGrid icon for frontend
+  {
+    title: 'Full-Stack Expertise',
+    skills: ['MERN Stack', 'PERN Stack'],
+    icon: Layers,
   },
-   {
+  {
+    title: 'Frontend Development',
+    skills: ['React', 'Next.js', 'Electron JS', 'Redux Toolkit', 'TanStack Query', 'Tailwind CSS', 'Material UI', 'Ant Design'],
+    icon: LayoutGrid,
+  },
+  {
     title: 'Mobile Development',
     skills: ['React Native'],
     icon: Smartphone,
@@ -25,7 +31,7 @@ const skillCategories = [
   {
     title: 'Backend Development',
     skills: ['Node.js', 'Express.js', 'RESTful APIs', 'GraphQL', 'Sequelize'],
-    icon: Server, // Using Server icon for backend
+    icon: Server,
   },
   {
     title: 'Databases & ORMs',
@@ -33,19 +39,24 @@ const skillCategories = [
     icon: Database,
   },
   {
-    title: 'Cloud Platforms',
-    skills: ['AWS', 'Netlify', 'Heroku', 'Vercel'],
+    title: 'Cloud & DevOps',
+    skills: ['AWS', 'DevOps', 'CI/CD Pipelines', 'Docker', 'Netlify', 'Heroku', 'Vercel'], // Moved CI/CD & Docker here
     icon: Cloud,
   },
   {
+    title: 'AI, ML & Web3',
+    skills: ['AI', 'Machine Learning (ML)', 'Web 3.0', 'Smart Contracts'], // Added Smart Contracts for Web3
+    icon: Brain,
+  },
+  {
     title: 'Development Tools',
-    skills: ['Git', 'Docker', 'Postman', 'VSCode', 'Jira', 'CI/CD Pipelines'],
-    icon: Settings, // Reusing Settings icon for tools
+    skills: ['Git', 'Postman', 'VSCode', 'Jira'], // CI/CD & Docker moved to Cloud & DevOps
+    icon: Settings,
   },
    {
     title: 'Soft Skills',
     skills: ['Problem Solving', 'Collaboration', 'Communication', 'Time Management', 'Attention to Detail'],
-    icon: Smile, // Using Smile icon for soft skills
+    icon: Smile,
   },
 ];
 
@@ -54,7 +65,7 @@ const SkillsSection: React.FC = () => {
     hidden: {},
     visible: {
       transition: {
-        staggerChildren: 0.08, // Even faster stagger
+        staggerChildren: 0.08,
       },
     },
   };
@@ -64,34 +75,31 @@ const SkillsSection: React.FC = () => {
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.4, ease: 'easeOut' }, // Slightly faster transition
+      transition: { duration: 0.4, ease: 'easeOut' },
     },
   };
 
   return (
-    <div className="w-full max-w-6xl mx-auto"> {/* Wider max-width */}
+    <div className="w-full max-w-6xl mx-auto">
       <SectionHeading sectionNumber="04.">My Technical Skills</SectionHeading>
       <motion.div
-        className="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-8 gap-y-10" // Adjusted gap
+        className="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-8 gap-y-10"
         variants={containerVariants}
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: true, amount: 0.1 }} // Trigger animation earlier
+        viewport={{ once: true, amount: 0.1 }}
       >
         {skillCategories.map((category) => (
-          <motion.div key={category.title} variants={itemVariants} className="flex flex-col"> {/* Ensure flex column layout */}
-            {/* Category Title Styling */}
-            <h3 className="text-lg font-semibold text-primary mb-5 flex items-center gap-2"> {/* Increased bottom margin */}
+          <motion.div key={category.title} variants={itemVariants} className="flex flex-col">
+            <h3 className="text-lg font-semibold text-primary mb-5 flex items-center gap-2">
                {category.icon && <category.icon className="h-5 w-5" />}
               {category.title}
             </h3>
-            {/* Badge Container */}
             <div className="flex flex-wrap gap-2">
               {category.skills.map((skill) => (
                 <Badge
                   key={skill}
                   variant="outline"
-                  // Enhanced badge styling
                   className="text-sm font-medium px-3 py-1 border-border bg-secondary/50 text-secondary-foreground/90 hover:bg-accent hover:text-accent-foreground hover:border-primary/50 transition-all duration-200 cursor-default shadow-sm"
                 >
                   {skill}
