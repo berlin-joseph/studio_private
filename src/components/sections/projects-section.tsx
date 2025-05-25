@@ -1,7 +1,7 @@
 // @ts-nocheck
 'use client';
 import React, {useState} from 'react';
-// import Image from 'next/image'; // Image component no longer used here
+import Image from 'next/image';
 import {
   Card,
   CardHeader,
@@ -26,8 +26,8 @@ interface Project {
   tags: string[];
   githubUrl?: string;
   liveUrl?: string;
-  image: string; // Retained for potential future use or AI analysis, not for display
-  imageHint: string; // Retained for potential future use or AI analysis, not for display
+  image: string; 
+  imageHint: string; 
 }
 
 // Updated with user's projects and details from README
@@ -220,7 +220,7 @@ const ProjectsSection: React.FC = () => {
         {initialProjects.map((project, index) => (
           <motion.div key={project.title} variants={itemVariants}> {/* Use project title as key */}
             {/* Card styling improvements */}
-            <Card className="h-full flex flex-col bg-card border border-border/50 hover:border-primary/30 hover:shadow-xl transition-all duration-300 overflow-hidden group transform hover:-translate-y-1.5">
+            <Card className="h-full flex flex-col bg-card border border-border/50 hover:border-primary/30 hover:shadow-lg transition-all duration-300 overflow-hidden group transform hover:-translate-y-1.5">
               {/* Image section removed */}
               <CardHeader className="pb-3 pt-5 px-5"> {/* Adjusted top padding */}
                 <CardTitle className="text-lg font-semibold text-foreground group-hover:text-primary transition-colors duration-200">

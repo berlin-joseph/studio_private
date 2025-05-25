@@ -15,7 +15,7 @@ const SectionHeading: React.FC<SectionHeadingProps> = ({ children, sectionNumber
         // Base styling
         "text-2xl sm:text-3xl font-semibold text-foreground/95 mb-8 sm:mb-10 relative flex items-center whitespace-nowrap", // Adjusted font size/weight, margins, added whitespace-nowrap
         // Decorative line
-        "after:content-[''] after:block after:relative after:top-px after:w-full after:max-w-sm sm:after:max-w-md md:after:max-w-lg after:h-px after:ml-4 after:bg-primary/30", // Adjusted line style and length
+        "after:content-[''] after:block after:relative after:top-px after:w-full after:max-w-sm sm:after:max-w-md md:after:max-w-lg after:h-[1.5px] after:ml-4 after:bg-primary/30", // Adjusted line style, thickness and length
         className
       )}
       {...props}
