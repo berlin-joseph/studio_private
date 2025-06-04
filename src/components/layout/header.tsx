@@ -2,12 +2,13 @@
 'use client';
 import React, {useState, useEffect} from 'react';
 import Link from 'next/link';
+import Image from 'next/image'; // Import Image
 import {Button, buttonVariants} from '@/components/ui/button';
 import {
   Sheet,
   SheetContent,
-  SheetTrigger,
   SheetTitle, 
+  SheetTrigger,
 } from '@/components/ui/sheet';
 import {Menu, X, Download} from 'lucide-react';
 import {motion} from 'framer-motion';
@@ -22,6 +23,7 @@ const navItems = [
 ];
 
 const resumeUrl = "https://drive.google.com/file/d/1jT-mCY__l-QYzECUoaIDowJRsGxSJPlP/view?usp=drive_link";
+const profileImageUrl = "https://media.licdn.com/dms/image/v2/D5603AQG_4dylBvX4UQ/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1675790558997?e=1754524800&v=beta&t=cvWyMrrBZldAP-mu946GTSIbhrauMsBLCSUHeIq802M";
 
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -39,7 +41,7 @@ export default function Header() {
         ...navItems.map(item => item.href.substring(1)),
       ];
       
-      const headerOffset = 80; // Height of the header
+      const headerOffset = 80; 
 
       for (let i = sections.length - 1; i >= 0; i--) {
         const sectionId = sections[i];
@@ -99,9 +101,16 @@ export default function Header() {
         <Link href="#hero" passHref legacyBehavior>
           <a
             onClick={(e) => handleNavLinkClick(e, '#hero')}
-            className="text-2xl sm:text-3xl font-bold text-primary cursor-pointer hover:text-primary/80 transition-colors duration-300"
+            className="cursor-pointer transition-opacity duration-300 hover:opacity-80"
           >
-            BJL
+            <Image
+              src={profileImageUrl}
+              alt="Berlin Joe L - Logo"
+              width={40} 
+              height={40}
+              className="rounded-full object-cover"
+              priority
+            />
           </a>
         </Link>
 
@@ -170,9 +179,15 @@ export default function Header() {
                  <Link href="#hero" passHref legacyBehavior>
                    <a
                      onClick={(e) => handleNavLinkClick(e, '#hero')}
-                     className="text-2xl font-bold text-primary"
+                     className="cursor-pointer transition-opacity duration-300 hover:opacity-80"
                    >
-                     BJL
+                     <Image
+                        src={profileImageUrl}
+                        alt="Berlin Joe L - Logo"
+                        width={36}
+                        height={36}
+                        className="rounded-full object-cover"
+                      />
                    </a>
                  </Link>
                  <Button
