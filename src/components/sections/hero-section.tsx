@@ -2,7 +2,7 @@
 'use client';
 import React from 'react';
 import Image from 'next/image';
-import { Button, buttonVariants } from '@/components/ui/button'; 
+import { Button, buttonVariants } from '@/components/ui/button';
 import {motion} from 'framer-motion';
 import {ArrowRight, Briefcase, Download, Github, Linkedin, Mail} from 'lucide-react';
 import { cn } from '@/lib/utils';
@@ -140,7 +140,7 @@ const HeroSection: React.FC = () => {
         <div className="relative w-64 h-64 sm:w-80 sm:h-80 lg:w-96 lg:h-96 group">
            <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-transparent rounded-full z-0 transform -translate-x-2 -translate-y-2 group-hover:translate-x-0 group-hover:translate-y-0 transition-transform duration-300"></div>
           <Image
-            src="https://media.licdn.com/dms/image/v2/D5603AQG_4dylBvX4UQ/profile-displayphoto-shrink_800_800/0/1675790558997?e=1753920000&v=beta&t=gT11YTwG5LngmH_2WefuGYr62IlJ8Y0yJ7DeCgHq0qU"
+            src="https://media.licdn.com/dms/image/v2/D5603AQG_4dylBvX4UQ/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1675790558997?e=1754524800&v=beta&t=cvWyMrrBZldAP-mu946GTSIbhrauMsBLCSUHeIq802M"
             alt="Berlin Joe L - Full-Stack Developer"
             width={384}
             height={384}
@@ -158,3 +158,5 @@ const HeroSection: React.FC = () => {
 };
 
 export default HeroSection;
+
+    
