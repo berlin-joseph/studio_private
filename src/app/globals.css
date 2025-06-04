@@ -90,25 +90,18 @@ body {
     @apply border-border;
   }
   html {
-    /* Add smooth scrolling */
     scroll-behavior: smooth;
-    /* Offset scroll position for fixed header (adjust h-20 based on actual header height) */
-    scroll-padding-top: theme(spacing.20);
+    scroll-padding-top: theme(spacing.20); 
   }
   body {
     @apply bg-background text-foreground;
   }
 
-  /* Section base styling */
   section {
-    /* Simplified padding */
-    @apply min-h-screen py-20 px-6 sm:px-10 md:px-16 lg:px-20;
-    /* Ensure sections are flex containers for centering content */
-    @apply flex flex-col justify-center;
+    @apply flex flex-col justify-center py-20 md:py-24 lg:py-28 px-6 sm:px-8 md:px-12 lg:px-16;
   }
 }
 
-/* Custom scrollbar styling for a modern look */
 ::-webkit-scrollbar {
   width: 8px;
 }

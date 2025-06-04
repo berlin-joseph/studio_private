@@ -16,8 +16,32 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Berlin's Portfolio",
-  description: "Berlin Joe L's portfolio - Full-Stack Software Developer specializing in scalable and user-centric applications.",
+  title: "Berlin Joe L - Full-Stack Developer | React, Next.js, AI/ML Expert",
+  description: "Berlin Joe L's official portfolio. A skilled Full-Stack Software Developer specializing in scalable, user-centric web and mobile applications using React, Next.js, Node.js, AI/ML, and DevOps practices. Explore projects and experience.",
+  keywords: ['Berlin Joe L', 'Full-Stack Developer', 'Software Engineer', 'React Developer', 'Next.js', 'Node.js', 'MERN Stack', 'PERN Stack', 'AI', 'ML', 'Web3', 'DevOps', 'AWS', 'Portfolio', 'Web Developer', 'Mobile Developer'],
+  openGraph: {
+    title: "Berlin Joe L - Full-Stack Developer Portfolio",
+    description: "Explore the portfolio of Berlin Joe L, a Full-Stack Developer creating innovative web and mobile solutions.",
+    url: '/', // Replace with your actual domain in production
+    siteName: "Berlin Joe L's Portfolio",
+    images: [
+      {
+        url: 'https://placehold.co/1200x630.png', // Replace with your actual OG image URL
+        width: 1200,
+        height: 630,
+        alt: 'Berlin Joe L Portfolio Social Preview',
+      },
+    ],
+    locale: 'en_US',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: "Berlin Joe L - Full-Stack Developer Portfolio",
+    description: "Discover Berlin Joe L's work as a Full-Stack Developer, showcasing projects in React, Next.js, AI/ML, and more.",
+    images: ['https://placehold.co/1200x630.png'], // Replace with your actual Twitter image URL
+    // creator: '@yourtwitterhandle', // Optional: Add your Twitter handle
+  },
 };
 
 export default function RootLayout({

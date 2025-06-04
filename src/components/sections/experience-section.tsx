@@ -1,4 +1,3 @@
-
 'use client';
 import React from 'react';
 import {Tabs, TabsContent, TabsList, TabsTrigger} from '@/components/ui/tabs';
@@ -21,10 +20,10 @@ const experiences: Experience[] = [
     role: 'MERN Stack Developer',
     duration: 'July 2024 - November 2024',
     description: [
-      'Built a robust delivery application enabling real-time order tracking and management.',
-      'Improved delivery efficiency by 40% through route optimization and analytics.',
-      'Integrated secure payment gateways and notification systems, increasing user satisfaction by 30%.',
-      'Led a team to implement CI/CD pipelines, cutting deployment time by 35%.',
+      'Spearheaded the development of a robust MERN stack delivery application, incorporating real-time order tracking and comprehensive management features.',
+      'Engineered and implemented route optimization algorithms and analytics dashboards, measurably improving delivery efficiency by approximately 40%.',
+      'Integrated secure, multi-platform payment gateways and sophisticated notification systems, contributing to a 30% increase in user satisfaction scores.',
+      'Led a cross-functional team to establish and refine CI/CD pipelines, significantly reducing deployment times by an estimated 35% and enhancing release velocity.',
     ],
     value: 'feather',
   },
@@ -33,9 +32,9 @@ const experiences: Experience[] = [
     role: 'Application Developer',
     duration: 'January 2024 - June 2024',
     description: [
-      'Developed a feature-rich CRM application with React Native and Node.js, enhancing customer engagement by 40%.',
-      'Optimized backend architecture, reducing API latency by 40% and increasing throughput.',
-      'Achieved 95% test coverage using Jest and React Testing Library.',
+      'Developed and launched a feature-rich CRM application using React Native and Node.js, successfully enhancing customer engagement metrics by 40%.',
+      'Architected and optimized backend systems, achieving a 40% reduction in API latency and substantially increasing request throughput.',
+      'Championed software quality by implementing comprehensive testing strategies, achieving 95% test coverage with Jest and React Testing Library.',
     ],
     value: 'micromen',
   },
@@ -44,9 +43,9 @@ const experiences: Experience[] = [
     role: 'Junior Software Developer',
     duration: 'January 2023 - January 2024',
     description: [
-      'Designed scalable mobile applications with React Native, improving development speed by 20%.',
-      'Streamlined state management using Redux Toolkit, reducing code complexity by 30%.',
-      'Boosted app performance by 25% with lazy loading and efficient code-splitting.',
+      'Contributed to designing and building scalable mobile applications with React Native, accelerating development cycles by approximately 20%.',
+      'Streamlined application state management using Redux Toolkit, effectively reducing code complexity by an estimated 30% and improving maintainability.',
+      'Enhanced mobile app performance by 25% through strategic implementation of lazy loading techniques and efficient code-splitting practices.',
     ],
     value: 'paladin',
   },
@@ -65,8 +64,8 @@ const ExperienceSection: React.FC = () => {
               className={cn(
                 "w-full text-left justify-start px-4 py-3 whitespace-nowrap md:whitespace-normal",
                 "text-muted-foreground hover:bg-accent/70 hover:text-primary",
-                "data-[state=active]:bg-primary/10 data-[state=active]:text-primary data-[state=active]:font-medium", // Adjusted active state
-                "data-[state=active]:shadow-inner data-[state=active]:border-primary", // Added inner shadow and border for active
+                "data-[state=active]:bg-primary/10 data-[state=active]:text-primary data-[state=active]:font-medium",
+                "data-[state=active]:shadow-inner data-[state=active]:border-primary", 
                 "relative border-l-2 border-transparent data-[state=active]:border-primary -ml-px",
                 "transition-all duration-200"
               )}

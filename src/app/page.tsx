@@ -24,7 +24,6 @@ const SectionWrapper: FC<{children: React.ReactNode; id: string; className?: str
   }, [isInView, controls]);
 
   return (
-    // Apply base section styles via globals.css @layer base section
     <motion.section
       id={id}
       ref={ref}
@@ -35,7 +34,7 @@ const SectionWrapper: FC<{children: React.ReactNode; id: string; className?: str
       initial="hidden"
       animate={controls}
       transition={{duration: 0.6, ease: 'easeOut'}}
-      className={cn(className)} // Allow additional classes if needed
+      className={cn("min-h-[70vh]", className)} // Adjusted min-height
     >
       {children}
     </motion.section>

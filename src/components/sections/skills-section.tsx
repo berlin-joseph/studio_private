@@ -1,16 +1,14 @@
-
 'use client';
 import React from 'react';
 import {Badge} from '@/components/ui/badge';
 import SectionHeading from '@/components/ui/section-heading';
 import {motion} from 'framer-motion';
-import { Code, Database, Cloud, Settings, Smile, Server, Smartphone, LayoutGrid, Layers, Brain, Workflow } from 'lucide-react'; // Added Layers, Brain, Workflow
+import { Code, Database, Cloud, Settings, Smile, Server, Smartphone, LayoutGrid, Layers, Brain, Workflow, Briefcase } from 'lucide-react';
 
-// Updated skill categories based on user's proficiency
 const skillCategories = [
   {
     title: 'Programming Languages',
-    skills: ['JavaScript', 'TypeScript', 'Python', 'HTML5', 'CSS3', 'SQL'], // Added Python as it's common for AI/ML
+    skills: ['JavaScript', 'TypeScript', 'Python', 'HTML5', 'CSS3', 'SQL'],
     icon: Code,
   },
   {
@@ -40,23 +38,23 @@ const skillCategories = [
   },
   {
     title: 'Cloud & DevOps',
-    skills: ['AWS', 'DevOps', 'CI/CD Pipelines', 'Docker', 'Netlify', 'Heroku', 'Vercel'], // Moved CI/CD & Docker here
+    skills: ['AWS', 'DevOps', 'CI/CD Pipelines', 'Docker', 'Netlify', 'Heroku', 'Vercel'],
     icon: Cloud,
   },
   {
     title: 'AI, ML & Web3',
-    skills: ['AI', 'Machine Learning (ML)', 'Web 3.0', 'Smart Contracts'], // Added Smart Contracts for Web3
+    skills: ['AI', 'Machine Learning (ML)', 'Web 3.0', 'Smart Contracts'],
     icon: Brain,
   },
   {
     title: 'Development Tools',
-    skills: ['Git', 'Postman', 'VSCode', 'Jira'], // CI/CD & Docker moved to Cloud & DevOps
+    skills: ['Git', 'GitHub', 'Postman', 'VSCode', 'Jira'],
     icon: Settings,
   },
    {
-    title: 'Soft Skills',
-    skills: ['Problem Solving', 'Collaboration', 'Communication', 'Time Management', 'Attention to Detail'],
-    icon: Smile,
+    title: 'Methodologies & Soft Skills',
+    skills: ['Agile Methodologies', 'Problem Solving', 'Collaboration', 'Communication', 'Time Management', 'Attention to Detail'],
+    icon: Briefcase, // Changed icon for broader professional skills
   },
 ];
 

@@ -1,7 +1,6 @@
-
 'use client';
 import React from 'react';
-import { buttonVariants } from '@/components/ui/button'; // Import buttonVariants
+import { buttonVariants } from '@/components/ui/button';
 import {motion} from 'framer-motion';
 import {ArrowRight} from 'lucide-react';
 import { cn } from '@/lib/utils';
@@ -12,8 +11,8 @@ const HeroSection: React.FC = () => {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.15, // Slightly faster stagger
-        delayChildren: 0.2, // Slightly faster delay
+        staggerChildren: 0.15,
+        delayChildren: 0.2,
       },
     },
   };
@@ -23,7 +22,7 @@ const HeroSection: React.FC = () => {
     visible: {
       opacity: 1,
       y: 0,
-      transition: {duration: 0.5, ease: 'easeOut'}, // Slightly faster transition
+      transition: {duration: 0.5, ease: 'easeOut'},
     },
   };
 
@@ -31,53 +30,53 @@ const HeroSection: React.FC = () => {
     e.preventDefault();
     const contactSection = document.getElementById('contact');
     if (contactSection) {
-       // Let smooth scrolling with scroll-padding-top handle the offset
        contactSection.scrollIntoView({ behavior: 'smooth' });
     }
   };
 
-  // Calculate years of experience dynamically (approximate)
-  const startDate = new Date(2023, 0); // January 2023
+  const startDate = new Date(2023, 0); 
   const currentDate = new Date();
-  const yearsExperience = Math.floor((currentDate.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24 * 365));
-  const experienceText = yearsExperience > 0 ? `${yearsExperience}+ year${yearsExperience > 1 ? 's' : ''}` : 'under a year';
+  let yearsExperience = currentDate.getFullYear() - startDate.getFullYear();
+  const m = currentDate.getMonth() - startDate.getMonth();
+  if (m < 0 || (m === 0 && currentDate.getDate() < startDate.getDate())) {
+    yearsExperience--;
+  }
+  const experienceText = yearsExperience > 0 ? `${yearsExperience}+ year${yearsExperience > 1 ? 's' : ''}` : 'valuable industry';
 
 
   return (
-    // Ensure the container uses the available vertical space minus the header height
-    // `flex-grow` is handled by the main layout, we just need vertical centering here
     <motion.div
-      className="flex flex-col justify-center max-w-3xl" // Max width for content
+      className="flex flex-col justify-center max-w-3xl"
       variants={containerVariants}
       initial="hidden"
       animate="visible"
-       // Removed min-h-screen and pt-20 as section wrapper handles it
     >
       <motion.p
-        className="text-primary font-mono mb-3 sm:mb-4 text-base sm:text-lg" // Reduced bottom margin
+        className="text-primary font-mono mb-3 sm:mb-4 text-base sm:text-lg"
         variants={itemVariants}
       >
-        Hi, my name is
+        Hi there, my name is
       </motion.p>
       <motion.h1
-        className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-foreground mb-2 sm:mb-3" // Added font-extrabold, reduced margin
+        className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-foreground mb-2 sm:mb-3"
         variants={itemVariants}
       >
         Berlin Joe L.
       </motion.h1>
       <motion.h2
-        className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-foreground/80 mb-6 sm:mb-8" // Use foreground with opacity, adjusted margin
+        className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-foreground/80 mb-6 sm:mb-8"
         variants={itemVariants}
       >
-        I build things for the web.
+        I craft innovative digital experiences.
       </motion.h2>
       <motion.p
-        className="max-w-xl text-foreground/90 mb-8 sm:mb-10 text-base sm:text-lg leading-relaxed" // Adjusted margin, added leading-relaxed
+        className="max-w-xl text-foreground/90 mb-8 sm:mb-10 text-base sm:text-lg leading-relaxed"
         variants={itemVariants}
       >
-        I'm a Full-Stack Software Developer with {experienceText} of industry experience,
-        specializing in building scalable and user-centric applications. Currently, I'm focused on creating accessible,
-        impactful digital solutions using the latest technologies.
+        I'm a passionate Full-Stack Software Developer with {experienceText} of professional experience,
+        dedicated to architecting and building scalable, high-performance, and user-centric applications. 
+        My current focus involves leveraging cutting-edge technologies like AI/ML and modern web frameworks to create accessible,
+        impactful digital solutions that solve real-world problems and delight users.
       </motion.p>
       <motion.div variants={itemVariants}>
         <a
