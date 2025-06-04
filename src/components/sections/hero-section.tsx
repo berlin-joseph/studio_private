@@ -2,7 +2,7 @@
 'use client';
 import React from 'react';
 import Image from 'next/image';
-import { Button, buttonVariants } from '@/components/ui/button'; // Added this import
+import { Button, buttonVariants } from '@/components/ui/button'; 
 import {motion} from 'framer-motion';
 import {ArrowRight, Briefcase, Download, Github, Linkedin, Mail} from 'lucide-react';
 import { cn } from '@/lib/utils';
@@ -35,7 +35,7 @@ const HeroSection: React.FC = () => {
       opacity: 1,
       scale: 1,
       rotate: 0,
-      transition: { duration: 0.6, ease: [0.6, 0.05, -0.01, 0.9], delay: 0.3 },
+      transition: { duration: 0.6, ease: "easeOut", delay: 0.3 },
     },
   };
 
@@ -79,7 +79,7 @@ const HeroSection: React.FC = () => {
         animate="visible"
       >
         <motion.p
-          className="text-primary font-mono mb-2 sm:mb-3 text-base sm:text-lg"
+          className="text-primary font-mono mb-2 sm:mb-3 text-lg sm:text-xl" // Increased font size
           variants={itemVariants}
         >
           Hi, my name is
@@ -158,5 +158,3 @@ const HeroSection: React.FC = () => {
 };
 
 export default HeroSection;
-
-    
