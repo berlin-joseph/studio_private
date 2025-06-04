@@ -1,9 +1,10 @@
+
 'use client';
 import React from 'react';
 import {Tabs, TabsContent, TabsList, TabsTrigger} from '@/components/ui/tabs';
 import SectionHeading from '@/components/ui/section-heading';
 import {motion} from 'framer-motion';
-import { CheckCircle } from 'lucide-react'; 
+import { CheckSquare } from 'lucide-react'; // Changed to CheckSquare for a slightly different look
 import { cn } from '@/lib/utils';
 
 interface Experience {
@@ -16,36 +17,36 @@ interface Experience {
 
 const experiences: Experience[] = [
    {
-    company: 'Feather Software Solutions',
+    company: 'Feather Software', // Shortened name
     role: 'MERN Stack Developer',
-    duration: 'July 2024 - November 2024',
+    duration: 'July 2024 - Nov 2024', // Shortened duration
     description: [
-      'Spearheaded the development of a robust MERN stack delivery application, incorporating real-time order tracking and comprehensive management features.',
-      'Engineered and implemented route optimization algorithms and analytics dashboards, measurably improving delivery efficiency by approximately 40%.',
-      'Integrated secure, multi-platform payment gateways and sophisticated notification systems, contributing to a 30% increase in user satisfaction scores.',
-      'Led a cross-functional team to establish and refine CI/CD pipelines, significantly reducing deployment times by an estimated 35% and enhancing release velocity.',
+      'Spearheaded development of a MERN stack delivery app with real-time tracking & management features.',
+      'Engineered route optimization algorithms & analytics dashboards, improving delivery efficiency by ~40%.',
+      'Integrated secure payment gateways & notification systems, increasing user satisfaction by 30%.',
+      'Led a team to establish CI/CD pipelines, reducing deployment times by ~35% & enhancing release velocity.',
     ],
     value: 'feather',
   },
   {
-    company: 'Micromen Software Solutions',
+    company: 'Micromen Software', // Shortened name
     role: 'Application Developer',
-    duration: 'January 2024 - June 2024',
+    duration: 'Jan 2024 - June 2024', // Shortened duration
     description: [
-      'Developed and launched a feature-rich CRM application using React Native and Node.js, successfully enhancing customer engagement metrics by 40%.',
-      'Architected and optimized backend systems, achieving a 40% reduction in API latency and substantially increasing request throughput.',
-      'Championed software quality by implementing comprehensive testing strategies, achieving 95% test coverage with Jest and React Testing Library.',
+      'Developed a CRM app (React Native & Node.js), enhancing customer engagement by 40%.',
+      'Architected & optimized backend systems, achieving 40% API latency reduction & increased throughput.',
+      'Championed software quality via comprehensive testing (Jest & RTL), achieving 95% test coverage.',
     ],
     value: 'micromen',
   },
   {
-    company: 'Paladin Software Solutions',
-    role: 'Junior Software Developer',
-    duration: 'January 2023 - January 2024',
+    company: 'Paladin Software', // Shortened name
+    role: 'Jr. Software Developer', // Shortened role
+    duration: 'Jan 2023 - Jan 2024', // Shortened duration
     description: [
-      'Contributed to designing and building scalable mobile applications with React Native, accelerating development cycles by approximately 20%.',
-      'Streamlined application state management using Redux Toolkit, effectively reducing code complexity by an estimated 30% and improving maintainability.',
-      'Enhanced mobile app performance by 25% through strategic implementation of lazy loading techniques and efficient code-splitting practices.',
+      'Contributed to scalable mobile apps (React Native), accelerating development cycles by ~20%.',
+      'Streamlined state management (Redux Toolkit), reducing code complexity by ~30%.',
+      'Enhanced mobile app performance by 25% through lazy loading & code-splitting.',
     ],
     value: 'paladin',
   },
@@ -55,45 +56,45 @@ const ExperienceSection: React.FC = () => {
   return (
     <div className="w-full max-w-4xl mx-auto">
        <SectionHeading sectionNumber="02.">Where I've Worked</SectionHeading>
-      <Tabs defaultValue={experiences[0].value} className="flex flex-col md:flex-row gap-8 md:gap-10 mt-10" orientation="vertical">
-        <TabsList className="flex flex-row md:flex-col md:w-48 h-auto bg-transparent p-0 overflow-x-auto md:overflow-visible md:border-l-2 border-border/70 md:pr-2">
+      <Tabs defaultValue={experiences[0].value} className="flex flex-col md:flex-row gap-6 md:gap-8 mt-10 sm:mt-12" orientation="vertical"> {/* Adjusted gap and margin */}
+        <TabsList className="flex flex-row md:flex-col md:w-52 h-auto bg-transparent p-0 overflow-x-auto md:overflow-visible md:border-l-2 border-border/50 md:pr-0"> {/* Adjusted width and border */}
           {experiences.map((exp) => (
             <TabsTrigger
               key={exp.value}
               value={exp.value}
               className={cn(
-                "w-full text-left justify-start px-4 py-3 whitespace-nowrap md:whitespace-normal",
-                "text-muted-foreground hover:bg-accent/70 hover:text-primary",
-                "data-[state=active]:bg-primary/10 data-[state=active]:text-primary data-[state=active]:font-medium",
-                "data-[state=active]:shadow-inner data-[state=active]:border-primary", 
-                "relative border-l-2 border-transparent data-[state=active]:border-primary -ml-px",
-                "transition-all duration-200"
+                "w-full text-left justify-start px-4 py-3.5 text-sm whitespace-nowrap md:whitespace-normal", // Adjusted padding and text size
+                "text-muted-foreground hover:bg-accent/60 hover:text-primary",
+                "data-[state=active]:bg-primary/10 data-[state=active]:text-primary data-[state=active]:font-semibold", // Font-semibold for active
+                "data-[state=active]:shadow-sm data-[state=active]:border-primary", 
+                "relative border-l-2 md:border-l-4 border-transparent data-[state=active]:border-primary -ml-px md:-ml-1", // Thicker active border on md
+                "transition-all duration-200 ease-in-out"
               )}
             >
               {exp.company}
             </TabsTrigger>
           ))}
         </TabsList>
-        <div className="flex-1 md:pl-4">
+        <div className="flex-1 md:pl-6"> {/* Increased padding */}
           {experiences.map((exp) => (
              <TabsContent key={exp.value} value={exp.value} className="mt-0 focus-visible:ring-0 focus-visible:ring-offset-0">
                <motion.div
                  key={exp.value} 
-                 initial={{ opacity: 0, y: 15 }}
+                 initial={{ opacity: 0, y: 20 }} // Slightly increased y
                  animate={{ opacity: 1, y: 0 }}
-                 exit={{ opacity: 0, y: -15 }}
-                 transition={{ duration: 0.3, ease: 'easeOut' }}
+                 exit={{ opacity: 0, y: -20 }}
+                 transition={{ duration: 0.35, ease: 'easeOut' }} // Slightly adjusted duration
                >
-                <h3 className="text-xl sm:text-2xl font-semibold text-foreground mb-1">
+                <h3 className="text-xl sm:text-2xl font-semibold text-foreground mb-1.5"> {/* Adjusted margin */}
                   {exp.role}{' '}
                   <span className="text-primary font-medium">@ {exp.company}</span>
                 </h3>
-                <p className="text-sm text-muted-foreground mb-5 font-mono">{exp.duration}</p>
-                <ul className="space-y-3 list-none pl-0">
+                <p className="text-xs text-muted-foreground mb-6 font-mono tracking-wide">{exp.duration}</p> {/* Added tracking */}
+                <ul className="space-y-3.5 list-none pl-0"> {/* Increased space-y */}
                   {exp.description.map((point, i) => (
-                    <li key={i} className="flex items-start text-base">
-                       <CheckCircle className="text-primary mr-3 mt-1 h-4 w-4 flex-shrink-0" />
-                       <span className="text-foreground/90 leading-relaxed">{point}</span>
+                    <li key={i} className="flex items-start text-sm sm:text-base"> {/* Adjusted text size */}
+                       <CheckSquare className="text-primary mr-3 mt-0.5 h-4 w-4 flex-shrink-0" /> {/* Adjusted icon margin */}
+                       <span className="text-foreground/85 leading-relaxed">{point}</span> {/* Slightly less muted text */}
                     </li>
                   ))}
                 </ul>

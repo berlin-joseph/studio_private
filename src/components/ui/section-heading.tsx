@@ -13,16 +13,16 @@ const SectionHeading: React.FC<SectionHeadingProps> = ({ children, sectionNumber
     <h2
       className={cn(
         // Base styling
-        "text-2xl sm:text-3xl font-semibold text-foreground/95 mb-8 sm:mb-10 relative flex items-center whitespace-nowrap",
-        // Decorative line: adjusted thickness and width
-        "after:content-[''] after:block after:w-24 sm:after:w-32 after:h-0.5 after:bg-primary after:ml-4 sm:after:ml-5 after:rounded-full", 
+        "text-3xl sm:text-4xl font-bold text-foreground mb-10 sm:mb-12 relative flex items-center whitespace-nowrap", // Increased font size and boldness
+        // Decorative line: shorter, thicker, rounded
+        "after:content-[''] after:block after:w-16 sm:after:w-24 after:h-1 after:bg-primary after:ml-4 sm:after:ml-6 after:rounded-full", 
         className
       )}
       {...props}
     >
        {/* Optional Section Number */}
        {sectionNumber && (
-         <span className="text-primary font-mono text-xl sm:text-2xl mr-2 sm:mr-3">
+         <span className="text-primary font-mono text-xl sm:text-2xl mr-2 sm:mr-3"> {/* Adjusted size */}
            {sectionNumber}
          </span>
        )}
@@ -32,4 +32,3 @@ const SectionHeading: React.FC<SectionHeadingProps> = ({ children, sectionNumber
 };
 
 export default SectionHeading;
-
