@@ -8,6 +8,8 @@ import {ArrowRight, Briefcase, Download, Github, Linkedin, Mail} from 'lucide-re
 import { cn } from '@/lib/utils';
 import Link from 'next/link';
 
+const resumeUrl = "https://drive.google.com/file/d/1jT-mCY__l-QYzECUoaIDowJRsGxSJPlP/view?usp=drive_link";
+
 const HeroSection: React.FC = () => {
   const containerVariants = {
     hidden: {opacity: 0},
@@ -43,7 +45,7 @@ const HeroSection: React.FC = () => {
     e.preventDefault();
     const contactSection = document.getElementById('contact');
     if (contactSection) {
-       const headerOffset = 80; // Height of the header
+       const headerOffset = 80; 
        const elementPosition = contactSection.getBoundingClientRect().top;
        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
        window.scrollTo({
@@ -53,7 +55,7 @@ const HeroSection: React.FC = () => {
     }
   };
 
-  const startDate = new Date(2023, 0);
+  const startDate = new Date(2023, 0); 
   const currentDate = new Date();
   let yearsExperience = currentDate.getFullYear() - startDate.getFullYear();
   const m = currentDate.getMonth() - startDate.getMonth();
@@ -69,17 +71,15 @@ const HeroSection: React.FC = () => {
   ];
 
   return (
-    // Two-column layout for larger screens
     <div className="flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-16 w-full max-w-6xl mx-auto">
-      {/* Text Content */}
       <motion.div
-        className="lg:w-3/5 text-center lg:text-left" // Center text on small screens, left on large
+        className="lg:w-3/5 text-center lg:text-left"
         variants={containerVariants}
         initial="hidden"
         animate="visible"
       >
         <motion.p
-          className="text-primary font-mono mb-2 sm:mb-3 text-lg sm:text-xl" // Increased font size
+          className="text-primary font-mono mb-2 sm:mb-3 text-xl sm:text-2xl" 
           variants={itemVariants}
         >
           Hi, my name is
@@ -116,9 +116,17 @@ const HeroSection: React.FC = () => {
             Get In Touch
             <ArrowRight className="ml-2 h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
           </a>
-          <Button size="lg" variant="outline" className="group shadow-sm hover:shadow-primary/20 transition-all duration-300 transform hover:-translate-y-0.5">
+          <Link
+            href={resumeUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={cn(
+              buttonVariants({ size: 'lg', variant: 'outline' }),
+              "group shadow-sm hover:shadow-primary/20 transition-all duration-300 transform hover:-translate-y-0.5"
+            )}
+          >
             Download CV <Download className="ml-2 h-4 w-4 group-hover:animate-pulse" />
-          </Button>
+          </Link>
         </motion.div>
 
         <motion.div className="flex space-x-5 justify-center lg:justify-start" variants={itemVariants}>
@@ -130,7 +138,6 @@ const HeroSection: React.FC = () => {
         </motion.div>
       </motion.div>
 
-      {/* Image Content */}
       <motion.div
         className="lg:w-2/5 flex justify-center lg:justify-end mt-10 lg:mt-0"
         variants={imageVariants}
@@ -158,5 +165,3 @@ const HeroSection: React.FC = () => {
 };
 
 export default HeroSection;
-
-    

@@ -7,9 +7,9 @@ import {
   Sheet,
   SheetContent,
   SheetTrigger,
-  SheetTitle,
+  SheetTitle, 
 } from '@/components/ui/sheet';
-import {Menu, X, Download} from 'lucide-react'; // Added Download
+import {Menu, X, Download} from 'lucide-react';
 import {motion} from 'framer-motion';
 import {cn} from '@/lib/utils';
 
@@ -20,6 +20,8 @@ const navItems = [
   {name: 'Skills', href: '#skills'},
   {name: 'Contact', href: '#contact'},
 ];
+
+const resumeUrl = "https://drive.google.com/file/d/1jT-mCY__l-QYzECUoaIDowJRsGxSJPlP/view?usp=drive_link";
 
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -43,8 +45,7 @@ export default function Header() {
         const sectionId = sections[i];
         const sectionElement = document.getElementById(sectionId);
         if (sectionElement) {
-            // Adjust for sections that are near the bottom of the page
-            const buffer = window.innerHeight * 0.4; // 40% of viewport height as buffer
+            const buffer = window.innerHeight * 0.4; 
             if (currentScrollY >= sectionElement.offsetTop - headerOffset - buffer) {
                 currentSection = sectionId;
                 break;
@@ -56,7 +57,7 @@ export default function Header() {
 
 
     window.addEventListener('scroll', handleScroll);
-    handleScroll(); // Initial check
+    handleScroll(); 
 
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
@@ -70,7 +71,7 @@ export default function Header() {
     const targetId = href.substring(1);
     const targetElement = document.getElementById(targetId);
     if (targetElement) {
-        const headerOffset = 80; // Height of the header
+        const headerOffset = 80; 
         const elementPosition = targetElement.getBoundingClientRect().top;
         const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
 
@@ -88,24 +89,24 @@ export default function Header() {
       animate={{y: 0}}
       transition={{duration: 0.5, ease: 'easeOut'}}
       className={cn(
-        'fixed top-0 left-0 right-0 z-50 transition-all duration-300 h-20', // Standardized height
+        'fixed top-0 left-0 right-0 z-50 transition-all duration-300 h-20', 
         isScrolled
-          ? 'bg-background/90 backdrop-blur-lg shadow-xl' // Enhanced shadow and blur
+          ? 'bg-background/90 backdrop-blur-lg shadow-xl' 
           : 'bg-transparent'
       )}
     >
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-full"> {/* Standardized padding */}
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-full">
         <Link href="#hero" passHref legacyBehavior>
           <a
             onClick={(e) => handleNavLinkClick(e, '#hero')}
-            className="text-2xl sm:text-3xl font-bold text-primary cursor-pointer hover:text-primary/80 transition-colors duration-300" // Slightly larger logo
+            className="text-2xl sm:text-3xl font-bold text-primary cursor-pointer hover:text-primary/80 transition-colors duration-300"
           >
             BJL
           </a>
         </Link>
 
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center space-x-5 lg:space-x-6"> {/* Adjusted spacing */}
+        <nav className="hidden md:flex items-center space-x-5 lg:space-x-6">
           {navItems.map((item, index) => (
             <Link key={item.name} href={item.href} passHref legacyBehavior>
               <motion.a
@@ -114,10 +115,10 @@ export default function Header() {
                 transition={{duration: 0.3, delay: 0.1 * index}}
                 onClick={(e) => handleNavLinkClick(e, item.href)}
                 className={cn(
-                  'text-sm font-medium transition-colors duration-300 relative py-1 group', 
+                  'text-sm transition-colors duration-300 relative py-1 group', 
                   activeSection === item.href.substring(1)
-                    ? 'text-primary'
-                    : 'text-foreground/70 hover:text-primary'
+                    ? 'text-primary font-semibold'
+                    : 'text-foreground/70 hover:text-primary font-medium'
                 )}
               >
                 {item.name}
@@ -133,9 +134,17 @@ export default function Header() {
             animate={{opacity: 1, scale: 1}}
             transition={{duration: 0.3, delay: 0.1 * navItems.length}}
           >
-            <Button variant="outline" size="sm" className="group">
+            <Link
+              href={resumeUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={cn(
+                buttonVariants({ variant: 'outline', size: 'sm' }),
+                "group"
+              )}
+            >
               Resume <Download className="ml-1.5 h-4 w-4 group-hover:animate-bounce" />
-            </Button>
+            </Link>
           </motion.div>
         </nav>
 
@@ -148,7 +157,7 @@ export default function Header() {
             <SheetTrigger
               className={cn(
                 buttonVariants({ variant: "ghost", size: "icon" }),
-                "text-primary hover:bg-accent/50 rounded-md" // Added rounded-md
+                "text-primary hover:bg-accent/50 rounded-md"
               )}
               aria-label="Open menu"
             >
@@ -170,22 +179,22 @@ export default function Header() {
                    variant="ghost"
                    size="icon"
                    onClick={() => setIsMobileMenuOpen(false)}
-                   className="text-foreground hover:bg-accent/50 rounded-md" // Added rounded-md
+                   className="text-foreground hover:bg-accent/50 rounded-md"
                    aria-label="Close menu"
                  >
                    <X className="h-6 w-6" />
                    <span className="sr-only">Close menu</span>
                  </Button>
                </div>
-                <nav className="flex flex-col space-y-4 p-6 mt-2 flex-grow"> {/* Reduced space-y and mt */}
+                <nav className="flex flex-col space-y-4 p-6 mt-2 flex-grow">
                   {navItems.map((item) => (
                     <Link key={item.name} href={item.href} passHref legacyBehavior>
                       <a
                         onClick={(e) => handleNavLinkClick(e, item.href)}
                         className={cn(
-                          'text-base font-medium transition-colors duration-300 py-2.5 px-4 text-center rounded-md', // Increased padding
+                          'text-base font-medium transition-colors duration-300 py-2.5 px-4 text-center rounded-md',
                            activeSection === item.href.substring(1)
-                            ? 'text-primary bg-primary/10 font-semibold ring-1 ring-primary/50' // Enhanced active state
+                            ? 'text-primary bg-primary/10 font-semibold ring-1 ring-primary/50' 
                             : 'text-foreground hover:text-primary hover:bg-accent/50'
                         )}
                       >
@@ -193,9 +202,17 @@ export default function Header() {
                       </a>
                     </Link>
                   ))}
-                   <Button variant="outline" className="mt-auto w-full group"> {/* Ensure button is at bottom */}
+                   <Link
+                      href={resumeUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={cn(
+                        buttonVariants({ variant: 'outline' }),
+                        "mt-auto w-full group"
+                      )}
+                    >
                     Resume <Download className="ml-1.5 h-4 w-4 group-hover:animate-bounce" />
-                  </Button>
+                  </Link>
                 </nav>
             </SheetContent>
           </Sheet>
