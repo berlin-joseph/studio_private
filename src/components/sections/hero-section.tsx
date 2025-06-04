@@ -1,10 +1,14 @@
 
 'use client';
 import React from 'react';
-import { buttonVariants } from '@/components/ui/button'; // Import buttonVariants
+import Image from 'next/image';
+import { Button, buttonVariants } from '@/components/ui/button';
 import {motion} from 'framer-motion';
-import {ArrowRight} from 'lucide-react';
+import {ArrowRight, Briefcase, Download, Github, Linkedin, Mail} from 'lucide-react';
 import { cn } from '@/lib/utils';
+import Link from 'next/link';
+
+const resumeUrl = "https://drive.google.com/file/d/1jT-mCY__l-QYzECUoaIDowJRsGxSJPlP/view?usp=drive_link";
 
 const HeroSection: React.FC = () => {
   const containerVariants = {
@@ -12,18 +16,28 @@ const HeroSection: React.FC = () => {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.15, // Slightly faster stagger
-        delayChildren: 0.2, // Slightly faster delay
+        staggerChildren: 0.1,
+        delayChildren: 0.1,
       },
     },
   };
 
   const itemVariants = {
-    hidden: {opacity: 0, y: 20},
+    hidden: {opacity: 0, y: 25},
     visible: {
       opacity: 1,
       y: 0,
-      transition: {duration: 0.5, ease: 'easeOut'}, // Slightly faster transition
+      transition: {duration: 0.5, ease: 'easeOut'},
+    },
+  };
+
+  const imageVariants = {
+    hidden: {opacity: 0, scale: 0.8, rotate: -5 },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      rotate: 0,
+      transition: { duration: 0.6, ease: "easeOut", delay: 0.3 },
     },
   };
 
@@ -31,68 +45,122 @@ const HeroSection: React.FC = () => {
     e.preventDefault();
     const contactSection = document.getElementById('contact');
     if (contactSection) {
-       // Let smooth scrolling with scroll-padding-top handle the offset
-       contactSection.scrollIntoView({ behavior: 'smooth' });
+       const headerOffset = 80; 
+       const elementPosition = contactSection.getBoundingClientRect().top;
+       const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+       window.scrollTo({
+         top: offsetPosition,
+         behavior: 'smooth'
+       });
     }
   };
 
-  // Calculate years of experience dynamically (approximate)
-  const startDate = new Date(2023, 0); // January 2023
+  const startDate = new Date(2023, 0); 
   const currentDate = new Date();
-  const yearsExperience = Math.floor((currentDate.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24 * 365));
-  const experienceText = yearsExperience > 0 ? `${yearsExperience}+ year${yearsExperience > 1 ? 's' : ''}` : 'under a year';
+  let yearsExperience = currentDate.getFullYear() - startDate.getFullYear();
+  const m = currentDate.getMonth() - startDate.getMonth();
+  if (m < 0 || (m === 0 && currentDate.getDate() < startDate.getDate())) {
+    yearsExperience--;
+  }
+  const experienceText = yearsExperience > 0 ? `${yearsExperience}+ year${yearsExperience > 1 ? 's' : ''}` : 'valuable industry';
 
+  const socialLinks = [
+    { name: 'GitHub', href: 'https://github.com/berlin-joseph', icon: Github },
+    { name: 'LinkedIn', href: 'https://www.linkedin.com/in/berlinjoel/', icon: Linkedin },
+    { name: 'Email', href: 'mailto:l.berlinjoe@hotmail.com', icon: Mail },
+  ];
 
   return (
-    // Ensure the container uses the available vertical space minus the header height
-    // `flex-grow` is handled by the main layout, we just need vertical centering here
-    <motion.div
-      className="flex flex-col justify-center max-w-3xl" // Max width for content
-      variants={containerVariants}
-      initial="hidden"
-      animate="visible"
-       // Removed min-h-screen and pt-20 as section wrapper handles it
-    >
-      <motion.p
-        className="text-primary font-mono mb-3 sm:mb-4 text-base sm:text-lg" // Reduced bottom margin
-        variants={itemVariants}
+    <div className="flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-16 w-full max-w-6xl mx-auto">
+      <motion.div
+        className="lg:w-3/5 text-center lg:text-left"
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
       >
-        Hi, my name is
-      </motion.p>
-      <motion.h1
-        className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-foreground mb-2 sm:mb-3" // Added font-extrabold, reduced margin
-        variants={itemVariants}
-      >
-        Berlin Joe L.
-      </motion.h1>
-      <motion.h2
-        className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-foreground/80 mb-6 sm:mb-8" // Use foreground with opacity, adjusted margin
-        variants={itemVariants}
-      >
-        I build things for the web.
-      </motion.h2>
-      <motion.p
-        className="max-w-xl text-foreground/90 mb-8 sm:mb-10 text-base sm:text-lg leading-relaxed" // Adjusted margin, added leading-relaxed
-        variants={itemVariants}
-      >
-        I'm a Full-Stack Software Developer with {experienceText} of industry experience,
-        specializing in building scalable and user-centric applications. Currently, I'm focused on creating accessible,
-        impactful digital solutions using the latest technologies.
-      </motion.p>
-      <motion.div variants={itemVariants}>
-        <a
-          href="#contact"
-          onClick={handleContactClick}
-          className={cn(
-            buttonVariants({ size: "lg" }),
-            "group shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-0.5 flex items-center"
-          )}
+        <motion.p
+          className="text-primary font-mono mb-2 sm:mb-3 text-xl sm:text-2xl" 
+          variants={itemVariants}
         >
-          Get In Touch
-          <ArrowRight className="ml-2 h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
-        </a>
+          Hi, my name is
+        </motion.p>
+        <motion.h1
+          className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-foreground mb-3 sm:mb-4"
+          variants={itemVariants}
+        >
+          Berlin Joe L.
+        </motion.h1>
+        <motion.h2
+          className="text-2xl sm:text-3xl md:text-4xl font-semibold text-foreground/80 mb-6 sm:mb-8"
+          variants={itemVariants}
+        >
+          I build dynamic and innovative web solutions.
+        </motion.h2>
+        <motion.p
+          className="max-w-xl text-foreground/90 mb-8 sm:mb-10 text-base sm:text-lg leading-relaxed mx-auto lg:mx-0"
+          variants={itemVariants}
+        >
+          I'm a Full-Stack Developer with {experienceText} of experience, passionate about crafting scalable, user-centric applications.
+          I specialize in leveraging modern technologies like React, Next.js, Node.js, and AI/ML to deliver impactful digital experiences.
+        </motion.p>
+
+        <motion.div className="flex flex-col sm:flex-row gap-4 mb-8 sm:justify-center lg:justify-start" variants={itemVariants}>
+          <a
+            href="#contact"
+            onClick={handleContactClick}
+            className={cn(
+              buttonVariants({ size: "lg", variant: "default" }),
+              "group shadow-md hover:shadow-primary/40 transition-all duration-300 transform hover:-translate-y-0.5 flex items-center justify-center sm:justify-start"
+            )}
+          >
+            Get In Touch
+            <ArrowRight className="ml-2 h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
+          </a>
+          <Link
+            href={resumeUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={cn(
+              buttonVariants({ size: 'lg', variant: 'outline' }),
+              "group shadow-sm hover:shadow-primary/20 transition-all duration-300 transform hover:-translate-y-0.5"
+            )}
+          >
+            Download CV <Download className="ml-2 h-4 w-4 group-hover:animate-pulse" />
+          </Link>
+        </motion.div>
+
+        <motion.div className="flex space-x-5 justify-center lg:justify-start" variants={itemVariants}>
+          {socialLinks.map((link) => (
+            <Link key={link.name} href={link.href} target="_blank" rel="noopener noreferrer" aria-label={link.name}>
+              <link.icon className="h-6 w-6 text-muted-foreground hover:text-primary transition-colors duration-300 transform hover:scale-110" />
+            </Link>
+          ))}
+        </motion.div>
       </motion.div>
-    </motion.div>
+
+      <motion.div
+        className="lg:w-2/5 flex justify-center lg:justify-end mt-10 lg:mt-0"
+        variants={imageVariants}
+        initial="hidden"
+        animate="visible"
+      >
+        <div className="relative w-64 h-64 sm:w-80 sm:h-80 lg:w-96 lg:h-96 group">
+           <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-transparent rounded-full z-0 transform -translate-x-2 -translate-y-2 group-hover:translate-x-0 group-hover:translate-y-0 transition-transform duration-300"></div>
+          <Image
+            src="https://media.licdn.com/dms/image/v2/D5603AQG_4dylBvX4UQ/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1675790558997?e=1754524800&v=beta&t=cvWyMrrBZldAP-mu946GTSIbhrauMsBLCSUHeIq802M"
+            alt="Berlin Joe L - Full-Stack Developer"
+            width={384}
+            height={384}
+            className="rounded-full object-cover w-full h-full shadow-2xl relative z-10 border-4 border-background group-hover:border-primary/50 transition-all duration-300 transform group-hover:scale-105"
+            data-ai-hint="professional portrait developer man indian"
+            priority
+          />
+           <div className="absolute -bottom-2 -right-2 w-16 h-16 bg-primary rounded-full z-20 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
+             <Briefcase className="w-7 h-7 text-primary-foreground"/>
+           </div>
+        </div>
+      </motion.div>
+    </div>
   );
 };
 

@@ -1,3 +1,4 @@
+
 'use client';
 import type {FC} from 'react';
 import Header from '@/components/layout/header';
@@ -14,7 +15,7 @@ import { cn } from '@/lib/utils';
 
 const SectionWrapper: FC<{children: React.ReactNode; id: string; className?: string}> = ({children, id, className}) => {
   const ref = useRef(null);
-  const isInView = useInView(ref, {once: true, amount: 0.2});
+  const isInView = useInView(ref, {once: true, amount: 0.15}); // Adjusted amount for earlier trigger
   const controls = useAnimation();
 
   useEffect(() => {
@@ -24,18 +25,17 @@ const SectionWrapper: FC<{children: React.ReactNode; id: string; className?: str
   }, [isInView, controls]);
 
   return (
-    // Apply base section styles via globals.css @layer base section
     <motion.section
       id={id}
       ref={ref}
       variants={{
-        hidden: {opacity: 0, y: 50},
+        hidden: {opacity: 0, y: 40}, // Slightly adjusted y
         visible: {opacity: 1, y: 0},
       }}
       initial="hidden"
       animate={controls}
       transition={{duration: 0.6, ease: 'easeOut'}}
-      className={cn(className)} // Allow additional classes if needed
+      className={cn("min-h-[60vh]", className)} // Adjusted min-height
     >
       {children}
     </motion.section>
@@ -45,11 +45,14 @@ const SectionWrapper: FC<{children: React.ReactNode; id: string; className?: str
 
 export default function Home() {
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-screen bg-background"> {/* Ensured bg-background here too */}
       <Header />
       <main className="flex-grow">
-        <SectionWrapper id="hero" className="min-h-[calc(100vh-5rem)] pt-20"> {/* Adjusted hero section height */}
-          <HeroSection />
+        {/* Hero section is typically full viewport height or close to it */}
+        <SectionWrapper id="hero" className="min-h-[calc(100vh-5rem)] !py-0 flex items-center"> {/* Removed padding for hero, flex items-center */}
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-20"> {/* Added container for content padding */}
+            <HeroSection />
+          </div>
         </SectionWrapper>
         <SectionWrapper id="about">
           <AboutSection />
@@ -63,7 +66,7 @@ export default function Home() {
         <SectionWrapper id="skills">
           <SkillsSection />
         </SectionWrapper>
-        <SectionWrapper id="contact">
+        <SectionWrapper id="contact" className="pb-24 md:pb-32"> {/* Added more padding at the bottom of contact section */}
           <ContactSection />
         </SectionWrapper>
       </main>
