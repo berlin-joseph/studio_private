@@ -16,18 +16,6 @@ interface Experience {
 }
 
 const experiences: Experience[] = [
-   {
-    company: 'Feather Software',
-    role: 'MERN Stack Developer',
-    duration: 'July 2024 - Dec 2024',
-    description: [
-      'Led the development of a cutting-edge MERN stack delivery application, incorporating real-time tracking and comprehensive order management functionalities.',
-      'Designed and implemented advanced route optimization algorithms and intuitive analytics dashboards, significantly boosting delivery efficiency by an estimated 40%.',
-      'Integrated multiple secure payment gateways and robust notification systems, enhancing user satisfaction and trust, reflected in a 30% improvement in user feedback scores.',
-      'Pioneered the establishment of CI/CD pipelines using GitHub Actions, which streamlined the deployment process, reducing deployment times by approximately 35% and increasing overall release velocity.',
-    ],
-    value: 'feather-new',
-  },
   {
     company: 'Feather Software',
     role: 'MERN Stack Developer',
