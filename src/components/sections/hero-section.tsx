@@ -1,3 +1,4 @@
+
 'use client';
 import React from 'react';
 import { buttonVariants } from '@/components/ui/button';
@@ -52,7 +53,7 @@ const HeroSection: React.FC = () => {
       animate="visible"
     >
       <motion.p
-        className="text-primary font-mono mb-3 sm:mb-4 text-base sm:text-lg"
+        className="text-primary font-mono mb-3 sm:mb-4 text-lg sm:text-xl" // Increased font size
         variants={itemVariants}
       >
         Hi there, my name is
@@ -96,3 +97,4 @@ const HeroSection: React.FC = () => {
 };
 
 export default HeroSection;
+

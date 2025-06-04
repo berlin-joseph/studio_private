@@ -1,3 +1,4 @@
+
 'use client';
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
@@ -28,7 +29,7 @@ const Footer: React.FC = () => {
   }, []);
 
   const socialIconClasses = "h-5 w-5 text-muted-foreground hover:text-primary transition-colors duration-300 transform hover:-translate-y-0.5";
-  const verticalLineClasses = "after:content-[''] after:block after:w-px after:h-20 sm:after:h-24 after:bg-muted-foreground/50 after:mt-4"; // Adjusted height and color
+  const verticalLineClasses = "after:content-[''] after:block after:w-px after:h-24 sm:after:h-28 after:bg-muted-foreground/50 after:mt-4"; // Adjusted height
 
   return (
     <>
@@ -67,7 +68,7 @@ const Footer: React.FC = () => {
          initial={{ opacity: 0 }}
          animate={{ opacity: 1 }}
          transition={{ duration: 0.5, delay: 0.8 }} // Slightly delayed fade-in
-         className="py-6 text-center text-muted-foreground text-xs sm:text-sm" // Adjusted padding and text size
+         className="py-6 text-center text-muted-foreground text-sm" // Standardized text size
       >
           {/* Social Icons for smaller screens (optional, if needed) */}
          {/* <div className="mb-4 flex lg:hidden justify-center space-x-6">
@@ -90,3 +91,4 @@ const Footer: React.FC = () => {
 };
 
 export default Footer;
+

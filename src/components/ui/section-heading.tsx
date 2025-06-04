@@ -14,8 +14,8 @@ const SectionHeading: React.FC<SectionHeadingProps> = ({ children, sectionNumber
       className={cn(
         // Base styling
         "text-2xl sm:text-3xl font-semibold text-foreground/95 mb-8 sm:mb-10 relative flex items-center whitespace-nowrap",
-        // Decorative line: shorter, thicker, rounded
-        "after:content-[''] after:block after:w-20 sm:after:w-24 after:h-1 after:bg-primary after:ml-4 sm:after:ml-5 after:rounded-full", 
+        // Decorative line: adjusted thickness and width
+        "after:content-[''] after:block after:w-24 sm:after:w-32 after:h-0.5 after:bg-primary after:ml-4 sm:after:ml-5 after:rounded-full", 
         className
       )}
       {...props}
@@ -32,3 +32,4 @@ const SectionHeading: React.FC<SectionHeadingProps> = ({ children, sectionNumber
 };
 
 export default SectionHeading;
+
